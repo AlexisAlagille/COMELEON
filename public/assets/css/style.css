@@ -1,4 +1,5 @@
-/* Structure générale */
+/*--------------------- Nav ---------------------*/
+
 .nav-bar {
     display: flex;
     align-items: center;
@@ -9,14 +10,12 @@
     font-family: "Poppins", sans-serif;
 }
 
-/* Logo */
 .nav-logo h1 {
     font-size: 22px;
     font-weight: 600;
     margin: 0;
 }
 
-/* Liens du menu */
 .nav-item-list {
     display: flex;
     gap: 30px;
@@ -35,7 +34,6 @@
     scale: calc(110%);
 }
 
-/* Bouton à droite */
 .nav-button {
     background: #0a6f4f;
     color: white;
@@ -48,5 +46,65 @@
 }
 
 .nav-button:hover {
+    background: #08563d;
+}
+/*------------------------------- Accueil ----------------------------------*/
+/* SECTION HERO */
+.hero {
+    width: 80%;
+    max-width: 90%;
+    height: 550px;
+    margin: 40px auto;
+    border-radius: 20px;
+    background-image: url("/assets/img/accueil.png"); /* ton image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: left;
+
+    overflow: hidden;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.6);
+    width: min(100%, 560px);
+    padding: 20px 48px;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #0a6f4f;
+}
+
+.hero-content h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.hero-content p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.hero-btn {
+    justify-content: start;
+    display: inline-block;
+    background: #0a6f4f;
+    padding: 12px 24px;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.hero-btn:hover {
     background: #08563d;
 }
