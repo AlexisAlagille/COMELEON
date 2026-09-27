@@ -1,0 +1,52 @@
+/* Structure générale */
+.nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 40px;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    font-family: "Poppins", sans-serif;
+}
+
+/* Logo */
+.nav-logo h1 {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Liens du menu */
+.nav-item-list {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-item-list a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-item-list a:hover {
+    color: #0a6f4f;
+    scale: calc(110%);
+}
+
+/* Bouton à droite */
+.nav-button {
+    background: #0a6f4f;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+    border-radius: 50px;
+}
+
+.nav-button:hover {
+    background: #08563d;
+}
