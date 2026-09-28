@@ -4,16 +4,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 10vh;
     padding: 15px 40px;
     background: #ffffff;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     font-family: "Poppins", sans-serif;
-}
-
-.nav-logo h1 {
-    font-size: 22px;
-    font-weight: 600;
-    margin: 0;
 }
 
 .nav-item-list {
@@ -32,6 +27,27 @@
 .nav-item-list a:hover {
     color: #0a6f4f;
     scale: calc(110%);
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+}
+
+.nav-bar-logo {
+    height: calc(10vh + 8px);
+    width: auto;
+    display: block;
+    transition: 0.3s;
+}
+
+.nav-bar-logo:hover {
+    scale: calc(110%);
+}
+.nav-logo h1 {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0;
 }
 
 .nav-button {

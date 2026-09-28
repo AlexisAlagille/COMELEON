@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+<div class="auth-container">
+    <section>
+       <h1>S'inscrire</h1>
+       <p>Accèdez à votre espace personnel et suivez vos demandes.</p>
+    </section>
+    <section>
+        <h1>Inscription</h1>
+        <form method="post">
+            <label>Email</label>
+            <input class="login-input" type="text" name="_username" placeholder="exemple@gmail.com">
+
+            <label>Mot de passe</label>
+            <input class="login-input" type="password" name="_password" placeholder="Votre mot de passe">
+
+            <label>Confirmer votre mot de passe</label>
+            <input class="login-input" type="password" name="_password" placeholder="Confirmation..">
+
+            <button class="submit-button" type="submit">S'inscrire</button>
+        </form>
+    </section>
+</div>
+{% endblock %}

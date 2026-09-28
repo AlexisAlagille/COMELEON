@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AuthController!{% endblock %}
+{% block title %}Connexion{% endblock %}
 
 {% block body %}
 <div class="auth-container">
@@ -19,7 +19,7 @@
 
             <button class="submit-button" type="submit">Se connecter</button>
         </form>
-        <p>Pas encore de compte ? <a>Créer un compte</a></p>
+        <p>Pas encore de compte ? <a href="{{path("app_register")}}">Créer un compte</a></p>
     </section>
 </div>
 {% endblock %}
