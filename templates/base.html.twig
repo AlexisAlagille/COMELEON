@@ -27,7 +27,7 @@
 
             <div class="nav-item-list">
                 <a href="{{path("app_accueil")}}">Accueil</a>
-                <a href="#">Prestations</a>
+                <a href="{{path("app_prestations")}}">Prestations</a>
                 <a href="#">Créer une demande</a>
                 {% if app.user %}
                     <a href="{{ path('app_logout') }}">Déconnexion</a>
