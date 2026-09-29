@@ -11,8 +11,25 @@
             <a href="#" class="hero-btn">Découvrir nos prestations</a>
         </div>
     </section>
+    <section class="card-section">
+    {% for prestation in prestations|slice(0, 3) %}
 
+        <div class="card">
 
+            <img class="card-img" src="{{ asset('assets/img/prestations/' ~ prestation.image) }}" alt="{{ prestation.titre }}">
 
+            <h2>{{ prestation.titre }}</h2>
+
+            <p>{{ prestation.description }}</p>
+
+            <p>{{ prestation.duree }} min</p>
+
+            <p>{{ prestation.prix }} €</p>
+
+        </div>
+
+    {% endfor %}
+</section>
+    
 </div>
 {% endblock %}

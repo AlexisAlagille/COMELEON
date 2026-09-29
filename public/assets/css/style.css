@@ -125,6 +125,87 @@
     background: #08563d;
 }
 
+/*------------------------------- CARTES PRESTATIONS ----------------------------------*/
+
+.card-section {
+    width: 80%;
+    max-width: 1200px;
+    margin: 60px auto;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+/* Carte */
+.card {
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+
+    padding: 20px;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+/* Animation au hover */
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* Image */
+.card-img {
+    width: 100%;
+    height: 180px;
+
+    object-fit: cover;
+
+    display: block;
+
+    border-radius: 12px;
+
+    margin-bottom: 18px;
+}
+
+/* Titre */
+.card h2 {
+    margin: 0 0 10px 0;
+
+    font-family: "Poppins", sans-serif;
+    font-size: 21px;
+    font-weight: 600;
+
+    color: #333;
+}
+
+/* Description */
+.card p {
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #666;
+}
+
+/* Prix */
+.card p:last-child {
+    font-size: 20px;
+    font-weight: 600;
+    color: #0a6f4f;
+
+    margin-top: 15px;
+}
+
+/* Durée */
+.card p:nth-last-child(2) {
+    color: #888;
+    font-size: 14px;
+}
+
 /* --- CONTAINER GLOBAL --- */
 .auth-container {
     display: flex;
