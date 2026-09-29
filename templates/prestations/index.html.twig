@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PrestationsController!{% endblock %}
+
+{% block body %}
+<div class = "Txt-Prestation">
+<br>
+
+<h1>Nos Prestations</h1>
+
+<h2>Découvrez l'ensemble de nos soins et choissisez celui qui vous correspond</h2>
+
+<br>
+</div>
+    <section class="card-section">
+    
+    {% for prestation in prestations %}
+
+        <div class="carte">
+
+            <img class="carte-image" src="{{ asset('assets/img/prestations/' ~ prestation.image) }}" alt="{{ prestation.titre }}">
+
+            <div class = "carte-contenu">
+
+            <h2>{{ prestation.titre }}</h2>
+
+            <p>{{ prestation.description }}</p>
+
+            <p>{{ prestation.duree }} min</p>
+
+            <p>{{ prestation.prix }} €</p>
+
+            </div>
+        </div>
+
+    {% endfor %}
+</section>
+
+{% endblock %}
