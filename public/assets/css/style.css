@@ -127,6 +127,15 @@
 
 /*------------------------------- CARTES PRESTATIONS ----------------------------------*/
 
+.card-title {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #0a6f4f;
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.6);
+}
+
 .card-section {
     width: 80%;
     max-width: 1200px;
@@ -266,12 +275,25 @@
 }
 
 .auth-container .login-input {
+    width: 100%;
+    box-sizing: border-box;
     padding: 12px;
     border-radius: 8px;
     border: 1px solid #ccc;
     font-size: 15px;
     outline: none;
     transition: 0.2s;
+}
+
+.auth-container .password-fields,
+.auth-container .password-fields > div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.auth-container .password-fields {
+    gap: 15px;
 }
 
 .auth-container .login-input:focus {
