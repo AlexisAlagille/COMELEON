@@ -1,0 +1,539 @@
+/*--------------------- Nav ---------------------*/
+
+.nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 10vh;
+    padding: 15px 40px;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    font-family: "Poppins", sans-serif;
+}
+
+.nav-item-list {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-item-list a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-item-list a:hover {
+    color: #0a6f4f;
+    scale: calc(110%);
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+}
+
+.nav-bar-logo {
+    height: calc(10vh + 8px);
+    width: auto;
+    display: block;
+    transition: 0.3s;
+}
+
+.nav-bar-logo:hover {
+    scale: calc(110%);
+}
+.nav-logo h1 {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.nav-button {
+    background: #0a6f4f;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+    border-radius: 50px;
+}
+
+.nav-button:hover {
+    background: #08563d;
+}
+/*------------------------------- Accueil ----------------------------------*/
+/* SECTION HERO */
+.hero {
+    width: 80%;
+    max-width: 90%;
+    height: 550px;
+    margin: 40px auto;
+    border-radius: 20px;
+    background-image: url("/assets/img/accueil.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: left;
+
+    overflow: hidden;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.6);
+    width: min(100%, 560px);
+    padding: 20px 48px;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #0a6f4f;
+}
+
+.hero-content h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.hero-content p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.hero-btn {
+    justify-content: start;
+    display: inline-block;
+    background: #0a6f4f;
+    padding: 12px 24px;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.hero-btn:hover {
+    background: #08563d;
+}
+
+/*------------------------------- CARTES PRESTATIONS ----------------------------------*/
+
+.card-title {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #0a6f4f;
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.6);
+}
+
+.card-section {
+    width: 80%;
+    max-width: 1200px;
+    margin: 60px auto;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+/* Carte */
+.card {
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+
+    padding: 20px;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+/* Animation au hover */
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* Image */
+.card-img {
+    width: 100%;
+    height: 180px;
+
+    object-fit: cover;
+
+    display: block;
+
+    border-radius: 12px;
+
+    margin-bottom: 18px;
+}
+
+/* Titre */
+.card h2 {
+    margin: 0 0 10px 0;
+
+    font-family: "Poppins", sans-serif;
+    font-size: 21px;
+    font-weight: 600;
+
+    color: #333;
+}
+
+/* Description */
+.card p {
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #666;
+}
+
+/* Prix */
+.card p:last-child {
+    font-size: 20px;
+    font-weight: 600;
+    color: #0a6f4f;
+
+    margin-top: 15px;
+}
+
+/* Durée */
+.card p:nth-last-child(2) {
+    color: #888;
+    font-size: 14px;
+}
+
+/* --- CONTAINER GLOBAL --- */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 60px 0;
+    font-family: "Poppins", sans-serif;
+}
+
+/* --- SECTION GAUCHE --- */
+.auth-container section:first-child {
+    background: #f7d7dd;
+    padding: 40px;
+    width: 600px;
+    height: 500px;
+    border-radius: 12px;
+}
+
+.auth-container section:first-child h1 {
+    font-size: 26px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.auth-container section:first-child p {
+    font-size: 16px;
+    color: #555;
+}
+
+/* --- SECTION DROITE --- */
+.auth-container section:last-child {
+    background: #fff;
+    padding: 40px;
+    width: 600px;
+    height: 500px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.auth-container section:last-child h1 {
+    font-size: 26px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* --- FORMULAIRE --- */
+.auth-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.auth-container label {
+    font-size: 15px;
+    font-weight: bold;
+    color: #333;
+}
+
+.auth-container .login-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    outline: none;
+    transition: 0.2s;
+}
+
+.auth-container .password-fields,
+.auth-container .password-fields > div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.auth-container .password-fields {
+    gap: 15px;
+}
+
+.auth-container .login-input:focus {
+    border-color: #0a6f4f;
+}
+
+/* --- BOUTON --- */
+.auth-container .submit-button {
+    background: #0a6f4f;
+    color: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.auth-container .submit-button:hover {
+    background: #08563d;
+}
+
+/* --- LIEN CRÉER UN COMPTE --- */
+.auth-container section:last-child p {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #555;
+}
+
+.auth-container section:last-child a {
+    color: #0a6f4f;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/*- CSS PRESTATIONS -*/
+/* ! grille : 3 colonnes, fond beige comme la maquette */
+.prestations {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px 32px;
+    padding: 24px;
+    background-color: #f5f1ed;
+}
+
+/* ! la carte sert de repère pour l'image et le texte */
+.carte {
+    position: relative;
+    height: 300px;
+    border-radius: 24px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    /* ! transition pour l'effet au survol */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ! l'image remplit toute la carte */
+.carte-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    transition: transform 0.5s ease;
+}
+
+/* ! dégradé sombre en haut pour lire le texte blanc, même sur image claire */
+.carte::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0) 55%);
+    transition: background 0.3s ease;
+}
+
+/* ! texte en haut à gauche, au-dessus du dégradé */
+.carte-contenu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    padding: 28px;
+}
+/* ! couleur forcée pour écraser l'ancien CSS */
+.carte .carte-contenu h2 {
+    margin: 0 0 12px 0;
+    font-size: 26px;
+    color: #ffffff;
+}
+/* ! couleur forcée pour écraser l'ancien CSS */
+.carte .carte-contenu h3 {
+    margin: 0 0 12px 0;
+    font-size: 26px;
+    color: #ffffff;
+}
+
+.carte .carte-contenu p {
+    margin: 0;
+    font-size: 18px;
+    color: #ffffff;
+}
+
+/* ! effet au survol : la carte monte, l'ombre grandit */
+.carte:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.25);
+}
+
+/* ! effet au survol : l'image zoome */
+.carte:hover .carte-image {
+    transform: scale(1.08);
+}
+
+/* ! effet au survol : le dégradé s'assombrit */
+.carte:hover::after {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.1) 60%);
+}
+
+.Txt-Prestation {
+text-align: center;
+margin-top: 40px;
+margin-bottom: 40px;
+font-family: Verdana, Geneva, Tahoma, sans-serif;
+background-color: #316d51;
+border-radius: 12px;
+width: 50%;
+margin-left: auto;
+margin-right: auto;
+}
+.create-demande-container {
+    zoom: 0.9;
+    width: min(760px, calc(100% - 32px));
+    margin: 48px auto 64px;
+    font-family: "Poppins", sans-serif;
+}
+
+.create-demande-container section {
+    padding: 40px;
+    background-image: url("/assets/img/demande-background.png");
+    object-fit: cover;
+    border: 1px solid #ededed;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.create-demande-container h1 {
+    margin: 0 0 8px;
+    color: #333;
+    font-size: 28px;
+}
+
+.create-demande-container p {
+    margin: 0 0 28px;
+    color: #666;
+    line-height: 1.6;
+}
+
+.create-demande-container form {
+    display: grid;
+    gap: 10px;
+}
+
+.create-demande-container label {
+    margin-top: 8px;
+    color: #333;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.create-demande-container input,
+.create-demande-container select,
+.create-demande-container textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 14px;
+    color: #333;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font: inherit;
+}
+
+.create-demande-container input,
+.create-demande-container select {
+    min-height: 48px;
+}
+
+.create-demande-container textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.create-demande-container input:focus,
+.create-demande-container select:focus,
+.create-demande-container textarea:focus {
+    border-color: #0a6f4f;
+    outline: 3px solid rgba(10, 111, 79, 0.14);
+}
+
+.create-demande-container .demande-submit {
+    justify-self: start;
+    min-height: 48px;
+    margin-top: 14px;
+    padding: 0 24px;
+    color: #fff;
+    background: #0a6f4f;
+    border: 0;
+    border-radius: 8px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.create-demande-container .demande-submit:hover {
+    background: #08563d;
+}
+
+@media (max-width: 600px) {
+    .create-demande-container {
+        margin: 24px auto 40px;
+    }
+
+    .create-demande-container section {
+        padding: 24px;
+    }
+
+    .create-demande-container h1 {
+        font-size: 24px;
+    }
+
+    .create-demande-container .demande-submit {
+        width: 100%;
+    }
+}

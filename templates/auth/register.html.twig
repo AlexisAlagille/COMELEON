@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+<div class="auth-container">
+    <section>
+       <h1>S'inscrire</h1>
+       <p>Accèdez à votre espace personnel et suivez vos demandes.</p>
+    </section>
+    <section>
+        <h1>Inscription</h1>
+
+        {{ form_start(form) }}
+            {{ form_label(form.email, 'Email') }}
+            {{ form_widget(form.email, {'attr': {'class': 'login-input', 'placeholder': 'exemple@gmail.com'}}) }}
+            {{ form_errors(form.email) }}
+
+            {{ form_label(form.nom, 'Nom') }}
+            {{ form_widget(form.nom, {'attr': {'class': 'login-input', 'placeholder': 'Nom...'}}) }}
+            {{ form_errors(form.nom) }}
+
+            {{ form_label(form.prenom, 'Prénom') }}
+            {{ form_widget(form.prenom, {'attr': {'class': 'login-input', 'placeholder': 'Prénom...'}}) }}
+            {{ form_errors(form.prenom) }}
+
+            {{ form_label(form.telephone, 'Téléphone') }}
+            {{ form_widget(form.telephone, {'attr': {'class': 'login-input', 'placeholder': 'Numéro de téléphone...'}}) }}
+            {{ form_errors(form.telephone) }}
+
+            {{ form_widget(form.plainPassword, {'attr': {'class': 'password-fields'}}) }}
+            {{ form_errors(form.plainPassword) }}
+
+            <button class="submit-button" type="submit">S'inscrire</button>
+        {{ form_end(form) }}
+    </section>
+</div>
+{% endblock %}

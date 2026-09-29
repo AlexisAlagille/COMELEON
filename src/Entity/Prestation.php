@@ -33,6 +33,9 @@ class Prestation
     #[ORM\OneToMany(mappedBy: 'prestation', targetEntity: Demande::class)]
     private Collection $demandes;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
+
     public function __construct()
     {
         $this->demandes = new ArrayCollection();
@@ -54,6 +57,10 @@ class Prestation
 
     public function getCategorie(): ?string { return $this->categorie; }
     public function setCategorie(string $categorie): self { $this->categorie = $categorie; return $this; }
+
+    public function getImage(): ?string{ return $this->image; }
+    
+    public function setImage(?string $image): static{ $this->image = $image; return $this; }
 
     public function getDemandes(): Collection { return $this->demandes; }
 
