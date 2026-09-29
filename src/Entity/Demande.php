@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\DemandeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: DemandeRepository::class)]
 class Demande
@@ -13,8 +14,13 @@ class Demande
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255)]
     #[ORM\Column(length: 255)]
     private ?string $description = null;
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $details = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $date = null;
@@ -28,7 +34,7 @@ class Demande
     private ?Prestation $prestation = null;
 
     #[ORM\ManyToOne(inversedBy: 'demandes')]
-    #[ORM\JoinColumn(name: "statut_id", referencedColumnName: "idStatut", nullable: false)]
+    #[ORM\JoinColumn(name: 'statut_id', referencedColumnName: 'id_statut', nullable: false)]
 
     private ?Statut $statut = null;
 
@@ -39,6 +45,9 @@ class Demande
 
     public function getDescription(): ?string { return $this->description; }
     public function setDescription(string $description): self { $this->description = $description; return $this; }
+
+    public function getDetails(): ?string { return $this->details; }
+    public function setDetails(?string $details): self { $this->details = $details; return $this; }
 
     public function getDate(): ?\DateTimeImmutable { return $this->date; }
     public function setDate(\DateTimeImmutable $date): self { $this->date = $date; return $this; }

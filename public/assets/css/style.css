@@ -329,3 +329,110 @@
     font-weight: 600;
     cursor: pointer;
 }
+
+.create-demande-container {
+    zoom: 0.9;
+    width: min(760px, calc(100% - 32px));
+    margin: 48px auto 64px;
+    font-family: "Poppins", sans-serif;
+}
+
+.create-demande-container section {
+    padding: 40px;
+    background-image: url("/assets/img/demande-background.png");
+    object-fit: cover;
+    border: 1px solid #ededed;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.create-demande-container h1 {
+    margin: 0 0 8px;
+    color: #333;
+    font-size: 28px;
+}
+
+.create-demande-container p {
+    margin: 0 0 28px;
+    color: #666;
+    line-height: 1.6;
+}
+
+.create-demande-container form {
+    display: grid;
+    gap: 10px;
+}
+
+.create-demande-container label {
+    margin-top: 8px;
+    color: #333;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.create-demande-container input,
+.create-demande-container select,
+.create-demande-container textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 14px;
+    color: #333;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font: inherit;
+}
+
+.create-demande-container input,
+.create-demande-container select {
+    min-height: 48px;
+}
+
+.create-demande-container textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.create-demande-container input:focus,
+.create-demande-container select:focus,
+.create-demande-container textarea:focus {
+    border-color: #0a6f4f;
+    outline: 3px solid rgba(10, 111, 79, 0.14);
+}
+
+.create-demande-container .demande-submit {
+    justify-self: start;
+    min-height: 48px;
+    margin-top: 14px;
+    padding: 0 24px;
+    color: #fff;
+    background: #0a6f4f;
+    border: 0;
+    border-radius: 8px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.create-demande-container .demande-submit:hover {
+    background: #08563d;
+}
+
+@media (max-width: 600px) {
+    .create-demande-container {
+        margin: 24px auto 40px;
+    }
+
+    .create-demande-container section {
+        padding: 24px;
+    }
+
+    .create-demande-container h1 {
+        font-size: 24px;
+    }
+
+    .create-demande-container .demande-submit {
+        width: 100%;
+    }
+}
