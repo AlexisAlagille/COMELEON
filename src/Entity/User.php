@@ -6,9 +6,10 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+class User implements PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -27,14 +28,14 @@ class User
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
-    #[ORM\Column(length: 20)]
+    #[ORM\Column(length: 20, nullable: true)]
     private ?string $telephone = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $date_inscription = null;
 
-    #[ORM\ManyToOne(inversedBy: 'users')]
-    #[ORM\JoinColumn(name: "role_id", referencedColumnName: "idRole", nullable: false)]
+    #[ORM\ManyToOne(targetEntity: Role::class, inversedBy: 'users')]
+    #[ORM\JoinColumn(name: 'role_id', referencedColumnName: 'id_role', nullable: false)]
     private ?Role $role = null;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Demande::class)]
@@ -60,7 +61,7 @@ class User
     public function setEmail(string $email): self { $this->email = $email; return $this; }
 
     public function getTelephone(): ?string { return $this->telephone; }
-    public function setTelephone(string $telephone): self { $this->telephone = $telephone; return $this; }
+    public function setTelephone(?string $telephone): self { $this->telephone = $telephone; return $this; }
 
     public function getDateInscription(): ?\DateTimeImmutable { return $this->date_inscription; }
     public function setDateInscription(\DateTimeImmutable $date): self { $this->date_inscription = $date; return $this; }

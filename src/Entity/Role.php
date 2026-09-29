@@ -12,10 +12,10 @@ class Role
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(name: 'id_role', type: 'integer')]
     private ?int $idRole = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $libelleRole = null;
 
     #[ORM\OneToMany(mappedBy: 'role', targetEntity: User::class)]
