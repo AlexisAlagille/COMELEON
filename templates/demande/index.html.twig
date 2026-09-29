@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer une demande{% endblock %}
+
+{% block body %}
+
+<div class="create-demande-container">
+
+    <section>
+
+        <h1>Créer une demande</h1>
+
+        <p>
+            Décrivez votre besoin et choisissez la prestation qui vous convient.
+        </p>
+
+        {{ form_start(form) }}
+
+            {{ form_row(form.prestation) }}
+
+            {{ form_row(form.date) }}
+
+            {{ form_row(form.description) }}
+
+            {{ form_row(form.details) }}
+
+            <button class="demande-submit" type="submit">
+                Envoyer la demande
+            </button>
+
+        {{ form_end(form) }}
+
+    </section>
+
+</div>
+
+{% endblock %}
