@@ -19,29 +19,46 @@
         {% endif %}
     </head>
     <body>
-        <nav class="nav-bar">
-            <div class="nav-logo">
-                <img class="nav-bar-logo" src="/assets/img/logo_ia.png" alt="logo_entreprise">
-                <h1>Eclat & Vous</h1>
-            </div>
+        {% set currentRoute = app.request.attributes.get('_route') %}
+        {% if currentRoute != 'app_espace' and not (currentRoute starts with 'app_espace_') %}
+            <nav class="nav-bar">
+                <div class="nav-logo">
+                    <img class="nav-bar-logo" src="/assets/img/logo_ia.png" alt="logo_entreprise">
+                    <h1>Eclat & Vous</h1>
+                </div>
 
-            <div class="nav-item-list">
-                <a href="{{path("app_accueil")}}">Accueil</a>
-                <a href="{{path("app_prestations")}}">Prestations</a>
-                {% if app.user %}
-                    <a href="{{ path('app_demande')}}">Créer une demande</a>
-                    <a href="{{ path('app_logout') }}">Déconnexion</a>
-                {% else %}
-                    <a href="{{ path('app_login') }}">Connexion</a>
+                <div class="nav-item-list">
+                    <a href="{{path("app_accueil")}}">Accueil</a>
+                    <a href="{{path("app_prestations")}}">Prestations</a>
+                    {% if app.user %}
+                        <a href="{{ path('app_demande')}}">Créer une demande</a>
+                        <a href="{{ path('app_logout') }}">Déconnexion</a>
+                    {% else %}
+                        <a href="{{ path('app_login') }}">Connexion</a>
+                    {% endif %}
+                </div>
+
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{path('app_espace')}}" class="nav-button">Espace Administrateur</a>
+                {% elseif is_granted('ROLE_CLIENT') %}
+                    <a href="{{path('app_espace')}}" class="nav-button">Espace Client</a>
                 {% endif %}
-            </div>
+            </nav>
+       
+        {% else %}
+            <nav class="space-nav">
+                <div class="space-nav-logo">
+                    <img class="space-nav-bar-logo" src="/assets/img/logo_ia.png" alt="logo_entreprise">
+                    <h1>Eclat & Vous</h1>
+                </div>
 
-            {% if is_granted('ROLE_ADMIN') %}
-                <a href="#" class="nav-button">Espace Administrateur</a>
-            {% elseif is_granted('ROLE_CLIENT') %}
-                <a href="#" class="nav-button">Espace Client</a>
-            {% endif %}
-        </nav>
+                <div class="space-nav-item-list">
+                    <a href="{{ path('app_espace') }}" class="space-nav-button{% if currentRoute == 'app_espace' %} is-active{% endif %}">Tableau de bord</a>
+                    <a href="{{ path('app_demande') }}" class="space-nav-button">Créer une demande</a>
+                    <a href="{{ path('app_logout') }}" class="space-nav-button space-nav-logout">Déconnexion</a>
+                </div>
+            </nav>
+        {% endif %}
         {% block body %}{% endblock %}
     </body>
 </html>
