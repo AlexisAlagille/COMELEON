@@ -31,6 +31,8 @@
             <p>{{ prestation.prix }} €</p>
 
             </div>
+
+            {% include 'panier/_ajouter.html.twig' with {prestation: prestation} %}
         </div>
 
     {% endfor %}

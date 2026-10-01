@@ -26,7 +26,9 @@
 
             <p>{{ prestation.duree }} min</p>
 
-            <p>{{ prestation.prix }} €</p>
+            <p class="prestation-price">{{ prestation.prix }} €</p>
+
+            {% include 'panier/_ajouter.html.twig' with {prestation: prestation} %}
 
         </div>
 

@@ -3,8 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Demande;
-use App\Entity\Prestation;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -16,12 +14,6 @@ class DemandeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('prestation', EntityType::class, [
-                'class' => Prestation::class,
-                'choice_label' => 'titre',
-                'label' => 'Prestation souhaitée',
-            ])
-
             ->add('date', DateTimeType::class, [
                 'label' => 'Date souhaitée',
                 'widget' => 'single_text',

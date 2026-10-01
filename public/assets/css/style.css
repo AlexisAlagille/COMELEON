@@ -30,6 +30,19 @@
     scale: calc(110%);
 }
 
+.cart-count {
+    display: inline-grid;
+    min-width: 20px;
+    height: 20px;
+    place-items: center;
+    margin-left: 4px;
+    padding: 0 5px;
+    border-radius: 999px;
+    background: #0a6f4f;
+    color: #fff;
+    font-size: 12px;
+}
+
 .nav-logo {
     display: flex;
     align-items: center;
@@ -227,6 +240,8 @@
 
 /* Carte */
 .card {
+    display: flex;
+    flex-direction: column;
     background: #ffffff;
     border-radius: 16px;
     overflow: hidden;
@@ -280,7 +295,7 @@
 }
 
 /* Prix */
-.card p:last-child {
+.card .prestation-price {
     font-size: 20px;
     font-weight: 600;
     color: #0a6f4f;
@@ -489,6 +504,206 @@
     color: #ffffff;
 }
 
+.carte > .cart-add-form {
+    position: absolute;
+    z-index: 3;
+    bottom: 18px;
+    left: 28px;
+}
+
+.cart-add-form {
+    margin: 0;
+}
+
+.cart-add-button {
+    min-height: 42px;
+    padding: 0 16px;
+    border: 0;
+    border-radius: 6px;
+    background: #fff;
+    color: #0a6f4f;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.cart-add-button:hover {
+    background: #eaf4ef;
+    transform: translateY(-1px);
+}
+
+.cart-add-form .cart-add-button {
+    margin-top: 12px;
+}
+
+.panier-page {
+    width: min(920px, calc(100% - 32px));
+    margin: 48px auto 72px;
+    font-family: "Poppins", sans-serif;
+}
+
+.panier-header {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #dfe7e2;
+}
+
+.panier-eyebrow {
+    margin: 0 0 6px;
+    color: #0a6f4f;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.panier-header h1,
+.panier-empty h2 {
+    margin: 0 0 8px;
+    color: #24352d;
+}
+
+.panier-header > p:last-child {
+    margin: 0;
+    color: #69766f;
+}
+
+.panier-flash {
+    margin: 16px 0;
+    color: #0a6f4f;
+}
+
+.panier-list {
+    display: grid;
+    gap: 10px;
+    margin: 24px 0;
+}
+
+.panier-item {
+    display: grid;
+    grid-template-columns: 72px minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 16px;
+    padding: 14px;
+    border: 1px solid #e1e8e4;
+    border-radius: 6px;
+    background: #fff;
+}
+
+.panier-item img {
+    width: 72px;
+    height: 72px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.panier-item-description h2,
+.panier-item-description p,
+.panier-item-price {
+    margin: 0;
+}
+
+.panier-item-description h2 {
+    color: #24352d;
+    font-size: 17px;
+}
+
+.panier-item-description p {
+    margin-top: 4px;
+    color: #69766f;
+    font-size: 14px;
+}
+
+.panier-item-price {
+    color: #0a6f4f;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.panier-remove-button {
+    padding: 8px 10px;
+    border: 0;
+    background: transparent;
+    color: #8b3535;
+    font: inherit;
+    cursor: pointer;
+}
+
+.panier-summary {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #dfe7e2;
+}
+
+.panier-continue-link {
+    color: #0a6f4f;
+    font-weight: 500;
+}
+
+.panier-total {
+    display: grid;
+    gap: 3px;
+    margin: 0;
+    color: #69766f;
+    font-size: 13px;
+}
+
+.panier-total strong {
+    color: #24352d;
+    font-size: 18px;
+}
+
+.panier-primary-link {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
+    border-radius: 6px;
+    background: #0a6f4f;
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.panier-primary-link:hover {
+    background: #08563d;
+}
+
+.panier-empty {
+    padding: 36px 0;
+}
+
+.panier-empty p {
+    max-width: 560px;
+    margin-bottom: 20px;
+    color: #69766f;
+}
+
+.demande-prestations {
+    margin: 20px 0;
+    padding: 0;
+    list-style: none;
+}
+
+.demande-prestations li {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid #e1e8e4;
+}
+
+.demande-prestations span {
+    color: #0a6f4f;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
 /* ! effet au survol : la carte monte, l'ombre grandit */
 .carte:hover {
     transform: translateY(-8px);
@@ -610,6 +825,38 @@
 }
 
 @media (max-width: 600px) {
+    .panier-page {
+        margin-top: 28px;
+    }
+
+    .panier-item {
+        grid-template-columns: 56px minmax(0, 1fr) auto;
+        gap: 10px;
+    }
+
+    .panier-item img {
+        width: 56px;
+        height: 56px;
+    }
+
+    .panier-item form {
+        grid-column: 2 / -1;
+        justify-self: end;
+    }
+
+    .panier-summary {
+        grid-template-columns: 1fr auto;
+        gap: 14px;
+    }
+
+    .panier-continue-link {
+        grid-column: 1 / -1;
+    }
+
+    .panier-primary-link {
+        grid-column: 1 / -1;
+    }
+
     .space-page {
         padding-left: 0;
     }

@@ -20,6 +20,7 @@
     </head>
     <body>
         {% set currentRoute = app.request.attributes.get('_route') %}
+        {% set panierCount = app.session.get('panier_prestations', [])|length %}
         {% if currentRoute != 'app_espace' and not (currentRoute starts with 'app_espace_') %}
             <nav class="nav-bar">
                 <div class="nav-logo">
@@ -30,6 +31,7 @@
                 <div class="nav-item-list">
                     <a href="{{path("app_accueil")}}">Accueil</a>
                     <a href="{{path("app_prestations")}}">Prestations</a>
+                    <a href="{{ path('app_panier') }}">Panier{% if panierCount > 0 %} <span class="cart-count">{{ panierCount }}</span>{% endif %}</a>
                     {% if app.user %}
                         <a href="{{ path('app_demande')}}">Créer une demande</a>
                         <a href="{{ path('app_logout') }}">Déconnexion</a>
@@ -54,6 +56,7 @@
 
                 <div class="space-nav-item-list">
                     <a href="{{ path('app_espace') }}" class="space-nav-button{% if currentRoute == 'app_espace' %} is-active{% endif %}">Tableau de bord</a>
+                    <a href="{{ path('app_panier') }}" class="space-nav-button">Panier{% if panierCount > 0 %} ({{ panierCount }}){% endif %}</a>
                     <a href="{{ path('app_demande') }}" class="space-nav-button">Créer une demande</a>
                     <a href="{{ path('app_logout') }}" class="space-nav-button space-nav-logout">Déconnexion</a>
                 </div>

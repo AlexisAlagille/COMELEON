@@ -11,12 +11,16 @@
         <h1>Créer une demande</h1>
 
         <p>
-            Décrivez votre besoin et choisissez la prestation qui vous convient.
+            Vérifiez les prestations de votre panier, puis indiquez la date souhaitée.
         </p>
 
-        {{ form_start(form) }}
+        <ul class="demande-prestations">
+            {% for prestation in prestations %}
+                <li>{{ prestation.titre }} <span>{{ prestation.prix|number_format(2, ',', ' ') }} €</span></li>
+            {% endfor %}
+        </ul>
 
-            {{ form_row(form.prestation) }}
+        {{ form_start(form) }}
 
             {{ form_row(form.date) }}
 
