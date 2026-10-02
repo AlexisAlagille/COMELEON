@@ -924,3 +924,25 @@
         width: 100%;
     }
 }
+
+.demandes-title
+{
+    text-align: left;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto; 
+}
+.demmandeUser
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    padding: 60px 0;
+    font-family: "Poppins", sans-serif;
+    background-color: gray;
+    backgroundradius: 12px;
+}

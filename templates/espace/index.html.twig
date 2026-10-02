@@ -8,13 +8,10 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/alexi/Documents/Workspace/COMELEON/src/Controller/EspaceController.php</code></li>
-        <li>Your template at <code>C:/Users/alexi/Documents/Workspace/COMELEON/templates/espace/index.html.twig</code></li>
-    </ul>
+<div class="demmandeUser">
+    <h1>Nombres de demandes : {{ demandes | length }}</h1>
 </div>
+
+
 {% endblock %}
