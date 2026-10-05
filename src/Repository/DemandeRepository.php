@@ -29,6 +29,19 @@ class DemandeRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function RecupererStatutDemandeParUtilisateur(User $user): array
+    {
+        return $this->createQueryBuilder('d')
+            ->select('s.libelleStatut')
+            ->join('d.statut', 's')
+            ->where('d.user = :user')
+            ->setParameter('user', $user)
+            ->orderBy('d.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+
 //    /**
 //     * @return Demande[] Returns an array of Demande objects
 //     */

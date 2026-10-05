@@ -19,9 +19,16 @@ final class EspaceController extends AbstractController
         //! Toutes les demandes de cet utilisateur
         $demandes = $demandeRepository->recupererDemandesParUtilisateur($user);
 
-        //! La clé 'demandes' est le nom utilisé dans la boucle Twig
+        //! Les libellés des statuts, transformés en liste simple : ['En cours', 'Terminée', ...]
+        $statuts = array_column(
+            $demandeRepository->RecupererStatutDemandeParUtilisateur($user),
+            'libelleStatut'
+        );
+
+        //! Les clés sont les noms utilisés dans le template Twig
         return $this->render('espace/index.html.twig', [
             'demandes' => $demandes,
+            'statuts' => $statuts,
         ]);
     }
 }

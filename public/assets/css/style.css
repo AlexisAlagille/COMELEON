@@ -943,6 +943,27 @@
     gap: 40px;
     padding: 60px 0;
     font-family: "Poppins", sans-serif;
-    background-color: gray;
-    backgroundradius: 12px;
+    background-color: rgb(111, 240, 147);
+    border-radius: 16px;
+    width: 75%;
 }
+
+/* ===== Page espace utilisateur ===== */
+.espace-page { margin: 1em auto; max-width: 1000px; width: 95%; font-family: sans-serif; }
+
+/* Les 3 cartes de statistiques */
+.espace-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; }
+.espace-carte { background: #fffcf8; border-radius: 20px; padding: 24px 28px; }
+.espace-nombre { font-size: 40px; font-weight: 600; color: #1f2d27; margin: 0; }
+.espace-libelle { color: #9a7b6f; margin: 4px 0 0; }
+
+/* Les dernières demandes */
+.espace-demande { background: #fffcf8; border-radius: 16px; padding: 16px 24px; margin-bottom: 12px; }
+.espace-demande h3 { margin: 0 0 4px; }
+.espace-demande p { margin: 4px 0; }
+.espace-statut { display: inline-block; padding: 2px 12px; border-radius: 999px; font-size: 14px; background: #eee; }
+.espace-statut-en-cours { background: #fde8c8; }
+.espace-statut-termine { background: #d6ecd9; }
+
+/* Affichage mobile : les cartes passent les unes sous les autres */
+@media (max-width: 700px) { .espace-stats { grid-template-columns: 1fr; } }
