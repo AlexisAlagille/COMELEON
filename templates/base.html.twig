@@ -3,7 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="stylesheet" href="/assets/css/style.css?v=6"/>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/css/style.css"/>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
         {% block stylesheets %}
         {% endblock %}
@@ -19,25 +22,49 @@
         {% endif %}
     </head>
     <body>
-        <nav class="nav-bar">
-            <div class="nav-logo">
-                <img class="nav-bar-logo" src="/assets/img/logo_ia.png" alt="logo_entreprise">
-                <h1>Eclat & Vous</h1>
-            </div>
+        {% set currentRoute = app.request.attributes.get('_route') %}
+        {% set panierCount = app.session.get('panier_prestations', [])|length %}
+        {% if currentRoute != 'app_espace' and not (currentRoute starts with 'app_espace_') %}
+            <nav class="nav-bar">
+                <div class="nav-logo">
+                    <img class="nav-bar-logo" src="/assets/img/logo_ia.png" alt="logo_entreprise">
+                    <h1>Eclat & Vous</h1>
+                </div>
 
-            <div class="nav-item-list">
-                <a href="{{path("app_accueil")}}">Accueil</a>
-                <a href="{{path("app_prestations")}}">Prestations</a>
-                {% if app.user %}
-                    <a href="{{ path('app_demande')}}">Créer une demande</a>
-                    <a href="{{ path('app_logout') }}">Déconnexion</a>
-                {% else %}
-                    <a href="{{ path('app_login') }}">Connexion</a>
+                <div class="nav-item-list">
+                    <a href="{{path("app_accueil")}}">Accueil</a>
+                    <a href="{{path("app_prestations")}}">Prestations</a>
+                    <a href="{{ path('app_panier') }}">Panier{% if panierCount > 0 %} <span class="cart-count">{{ panierCount }}</span>{% endif %}</a>
+                    {% if app.user %}
+                        <a href="{{ path('app_demande')}}">Créer une demande</a>
+                        <a href="{{ path('app_logout') }}">Déconnexion</a>
+                    {% else %}
+                        <a href="{{ path('app_login') }}">Connexion</a>
+                    {% endif %}
+                </div>
+
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{path('app_espace')}}" class="nav-button">Espace Administrateur</a>
+                {% elseif is_granted('ROLE_CLIENT') %}
+                    <a href="{{path('app_espace')}}" class="nav-button">Espace Client</a>
                 {% endif %}
-            </div>
+            </nav>
+       
+        {% else %}
+            <nav class="space-nav">
+                <div class="space-nav-logo">
+                    <img class="space-nav-bar-logo" src="/assets/img/logo_ia.png" alt="logo_entreprise">
+                    <h1>Eclat & Vous</h1>
+                </div>
 
-            <a href="#" class="nav-button">Prendre rendez-vous</a>
-        </nav>
+                <div class="space-nav-item-list">
+                    <a href="{{ path('app_espace') }}" class="space-nav-button{% if currentRoute == 'app_espace' %} is-active{% endif %}">Tableau de bord</a>
+                    <a href="{{ path('app_panier') }}" class="space-nav-button">Panier{% if panierCount > 0 %} ({{ panierCount }}){% endif %}</a>
+                    <a href="{{ path('app_demande') }}" class="space-nav-button">Créer une demande</a>
+                    <a href="{{ path('app_logout') }}" class="space-nav-button space-nav-logout">Déconnexion</a>
+                </div>
+            </nav>
+        {% endif %}
         {% block body %}{% endblock %}
     </body>
 </html>

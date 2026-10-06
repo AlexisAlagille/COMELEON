@@ -6,6 +6,7 @@ use App\Entity\Demande;
 use App\Entity\User;
 use App\Form\DemandeType;
 use App\Repository\StatutRepository;
+use App\Service\PanierService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,9 +21,19 @@ final class DemandeController extends AbstractController
     public function demande(
         Request $request,
         EntityManagerInterface $entityManager,
-        StatutRepository $statutRepository
+        StatutRepository $statutRepository,
+        PanierService $panier,
     ): Response {
+        $prestations = $panier->getPrestations();
+        if ($prestations === []) {
+            $this->addFlash('success', 'Votre panier est vide. Ajoutez une prestation avant de créer une demande.');
+            return $this->redirectToRoute('app_panier');
+        }
+
         $demande = new Demande();
+        foreach ($prestations as $prestation) {
+            $demande->addPrestation($prestation);
+        }
 
         $form = $this->createForm(DemandeType::class, $demande);
 
@@ -43,14 +54,16 @@ final class DemandeController extends AbstractController
             $demande->setStatut($statut);
             $entityManager->persist($demande);
             $entityManager->flush();
+            $panier->clear();
 
             $this->addFlash('success', 'Votre demande a bien été envoyée.');
 
-            return $this->redirectToRoute('app_accueil');
+            return $this->redirectToRoute('app_panier');
         }
 
         return $this->render('demande/index.html.twig', [
             'form' => $form,
+            'prestations' => $prestations,
         ]);
     }
 }

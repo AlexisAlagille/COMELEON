@@ -30,7 +30,7 @@ class Prestation
     #[ORM\Column(length: 255)]
     private ?string $categorie = null;
 
-    #[ORM\OneToMany(mappedBy: 'prestation', targetEntity: Demande::class)]
+    #[ORM\ManyToMany(targetEntity: Demande::class, mappedBy: 'prestations')]
     private Collection $demandes;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -68,7 +68,7 @@ class Prestation
     {
         if (!$this->demandes->contains($demande)) {
             $this->demandes->add($demande);
-            $demande->setPrestation($this);
+            $demande->addPrestation($this);
         }
         return $this;
     }
@@ -76,9 +76,7 @@ class Prestation
     public function removeDemande(Demande $demande): self
     {
         if ($this->demandes->removeElement($demande)) {
-            if ($demande->getPrestation() === $this) {
-                $demande->setPrestation(null);
-            }
+            $demande->removePrestation($this);
         }
         return $this;
     }

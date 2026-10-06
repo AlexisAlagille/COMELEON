@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon panier{% endblock %}
+
+{% block body %}
+<main class="panier-page">
+    <header class="panier-header">
+        <p class="panier-eyebrow">Éclat & Vous</p>
+        <h1>Mon panier</h1>
+        <p>{{ prestations|length }} prestation{{ prestations|length == 1 ? '' : 's' }}</p>
+    </header>
+
+    {% for message in app.flashes('success') %}
+        <p class="panier-flash">{{ message }}</p>
+    {% endfor %}
+
+    {% if prestations is empty %}
+        <section class="panier-empty">
+            <h2>Votre panier est vide</h2>
+            <p>Ajoutez les prestations qui vous intéressent pour les envoyer ensemble dans une demande.</p>
+            <a class="panier-primary-link" href="{{ path('app_prestations') }}">Découvrir les prestations</a>
+        </section>
+    {% else %}
+        <section class="panier-list" aria-label="Prestations dans le panier">
+            {% for prestation in prestations %}
+                <article class="panier-item">
+                    {% if prestation.image %}
+                        <img src="{{ asset('assets/img/prestations/' ~ prestation.image) }}" alt="{{ prestation.titre }}">
+                    {% endif %}
+                    <div class="panier-item-description">
+                        <h2>{{ prestation.titre }}</h2>
+                        <p>{{ prestation.duree }} min</p>
+                    </div>
+                    <p class="panier-item-price">{{ prestation.prix|number_format(2, ',', ' ') }} €</p>
+                    <form action="{{ path('app_panier_retirer', {id: prestation.id}) }}" method="post">
+                        <input type="hidden" name="_token" value="{{ csrf_token('panier_retirer_' ~ prestation.id) }}">
+                        <button type="submit" class="panier-remove-button">Retirer</button>
+                    </form>
+                </article>
+            {% endfor %}
+        </section>
+
+        <section class="panier-summary">
+            <a class="panier-continue-link" href="{{ path('app_prestations') }}">Continuer mes achats</a>
+            <p class="panier-total"><span>Total estimé</span><strong>{{ total|number_format(2, ',', ' ') }} €</strong></p>
+            {% if is_granted('ROLE_CLIENT') %}
+                <a class="panier-primary-link" href="{{ path('app_demande') }}">Créer la demande</a>
+            {% else %}
+                <a class="panier-primary-link" href="{{ path('app_login') }}">Connexion pour continuer</a>
+            {% endif %}
+        </section>
+    {% endif %}
+</main>
+{% endblock %}

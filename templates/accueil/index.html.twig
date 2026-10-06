@@ -8,7 +8,7 @@
         <div class="hero-content">
             <h1>Prenez soin de vous, tout simplement</h1>
             <p>Soins du visage, du corps et bien-être. Un moment rien que pour vous.</p>
-            <a href="#" class="hero-btn">Découvrir nos prestations</a>
+            <a href="{{path('app_prestations')}}" class="hero-btn">Découvrir nos prestations</a>
         </div>
     </section>
     <h1 class="card-title">Nos prestations</h1>
@@ -26,12 +26,54 @@
 
             <p>{{ prestation.duree }} min</p>
 
-            <p>{{ prestation.prix }} €</p>
+            <p class="prestation-price">{{ prestation.prix }} €</p>
+
+            {% include 'panier/_ajouter.html.twig' with {prestation: prestation} %}
 
         </div>
 
     {% endfor %}
 </section>
+    <section class="avis-section" aria-label="Avis clients">
+        <h2 class="card-title">Avis Clients</h2>
+
+        {% if avis is not empty %}
+            <div class="avis-carousel" role="region" aria-roledescription="carrousel" aria-label="Avis clients">
+                {% if avis|length > 1 %}
+                    <button class="avis-carousel-button avis-carousel-button--previous" type="button" aria-label="Avis précédent" aria-controls="avis-carousel-track" disabled>
+                        &#8249;
+                    </button>
+                {% endif %}
+
+                <div class="avis-carousel-track" id="avis-carousel-track" tabindex="0">
+                    {% for avisClient in avis %}
+                        <article class="avis-card" role="group" aria-roledescription="diapositive" aria-label="Avis {{ loop.index }} sur {{ loop.length }}">
+                            <div class="avis-note" role="img" aria-label="Note : {{ avisClient.note }} sur 5">
+                                {% for etoile in 1..5 %}
+                                    <span aria-hidden="true"{% if etoile <= avisClient.note %} class="is-filled"{% endif %}>★</span>
+                                {% endfor %}
+                            </div>
+                            <p class="avis-commentaire">{{ avisClient.commentaire ?: 'Aucun commentaire.' }}</p>
+                            <p class="avis-auteur">{{ avisClient.prenomAuteur }}  {{avisClient.nomAuteur}}</p>
+                            <p class="avis-date">Avis du {{ avisClient.dateAvis|date('d/m/Y') }}</p>
+                        </article>
+                    {% endfor %}
+                </div>
+
+                {% if avis|length > 1 %}
+                    <button class="avis-carousel-button avis-carousel-button--next" type="button" aria-label="Avis suivant" aria-controls="avis-carousel-track">
+                        &#8250;
+                    </button>
+                {% endif %}
+            </div>
+        {% else %}
+            <p class="avis-empty">Aucun avis client pour le moment.</p>
+        {% endif %}
+    </section>
     
 </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/script/avis-carousel.js') }}" defer></script>
 {% endblock %}

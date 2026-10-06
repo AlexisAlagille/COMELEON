@@ -1,0 +1,4 @@
+<form action="{{ path('app_panier_ajouter', {id: prestation.id}) }}" method="post" class="cart-add-form">
+    <input type="hidden" name="_token" value="{{ csrf_token('panier_ajouter_' ~ prestation.id) }}">
+    <button type="submit" class="cart-add-button">Ajouter au panier</button>
+</form>
