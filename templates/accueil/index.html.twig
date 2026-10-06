@@ -54,6 +54,7 @@
                                 {% endfor %}
                             </div>
                             <p class="avis-commentaire">{{ avisClient.commentaire ?: 'Aucun commentaire.' }}</p>
+                            <p class="avis-auteur">{{ avisClient.prenomAuteur }}  {{avisClient.nomAuteur}}</p>
                             <p class="avis-date">Avis du {{ avisClient.dateAvis|date('d/m/Y') }}</p>
                         </article>
                     {% endfor %}

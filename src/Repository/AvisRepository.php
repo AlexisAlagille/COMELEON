@@ -16,8 +16,16 @@ class AvisRepository extends ServiceEntityRepository
         parent::__construct($registry, Avis::class);
     }
 
-    public function findDernierAvis(int $limit = 6): array
+    public function findDerniersAvisAvecAuteur(int $limit = 6): array
     {
-        return $this->findBy([], ['dateAvis' => 'DESC'], $limit);
+        return $this->getEntityManager()
+            ->getConnection()
+            ->createQueryBuilder()
+            ->select('a.note', 'a.commentaire', 'a.date_avis AS dateAvis', 'u.prenom AS prenomAuteur', 'u.nom AS nomAuteur')
+            ->from('avis', 'a')
+            ->innerJoin('a', 'user', 'u', 'u.id = a.user_id')
+            ->orderBy('a.date_avis', 'DESC')
+            ->setMaxResults($limit)
+            ->fetchAllAssociative();
     }
 }

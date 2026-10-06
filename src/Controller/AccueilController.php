@@ -14,7 +14,7 @@ final class AccueilController extends AbstractController
     public function index(PrestationRepository $repository, AvisRepository $avisRepository): Response
     {
         $prestations = $repository->findAll();
-        $derniersAvis = $avisRepository->findDernierAvis(10);
+        $derniersAvis = $avisRepository->findDerniersAvisAvecAuteur(10);
 
         return $this->render('accueil/index.html.twig', [
             'controller_name' => 'AccueilController',
