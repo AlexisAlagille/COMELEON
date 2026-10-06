@@ -8,11 +8,42 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
+<div class="space-page">
+    <section class="espace">
+        <h1>Mes demandes</h1>
 
-<div class="demmandeUser">
-    <h1>Nombres de demandes : {{ demandes | length }}</h1>
+        {# Les 3 cartes #}
+        <div class="stats">
+            <div class="stat-card">
+                <span class="stat-nombre">{{ statuts|length }}</span>
+                <span class="stat-label">Total</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-nombre">{{ statuts|filter(s => s == 'En cours')|length }}</span>
+                <span class="stat-label">En cours</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-nombre">{{ statuts|filter(s => s == 'Terminée')|length }}</span>
+                <span class="stat-label">Terminées</span>
+            </div>
+        </div>
+
+        {# Les 3 dernières demandes #}
+        <h2>Dernières demandes</h2>
+        {% for demande in demandes|slice(0, 3) %}
+            <div class="demande-card">
+                <div>
+                    <h3>{{ demande.description }}</h3>
+                    <p class="demande-date">{{ demande.date|date('d/m/Y') }}</p>
+                </div>
+                <span class="badge badge-{{ demande.statut.idStatut }}">
+                    {{ demande.statut.libelleStatut }}
+                </span>
+            </div>
+        {% else %}
+            <p class="vide">Aucune demande pour le moment.</p>
+        {% endfor %}
+    </section>
 </div>
-
-
 
 {% endblock %}

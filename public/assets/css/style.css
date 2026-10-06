@@ -948,22 +948,68 @@
     width: 75%;
 }
 
-/* ===== Page espace utilisateur ===== */
-.espace-page { margin: 1em auto; max-width: 1000px; width: 95%; font-family: sans-serif; }
+.espace {
+    background: #f4f0ec;
+    padding: 2rem 1.5rem;
+    font-family: "Inter", sans-serif;
+    color: #1f2d27;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
 
 /* Les 3 cartes de statistiques */
-.espace-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; }
-.espace-carte { background: #fffcf8; border-radius: 20px; padding: 24px 28px; }
-.espace-nombre { font-size: 40px; font-weight: 600; color: #1f2d27; margin: 0; }
-.espace-libelle { color: #9a7b6f; margin: 4px 0 0; }
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 1.5rem 0 3rem;
+}
 
-/* Les dernières demandes */
-.espace-demande { background: #fffcf8; border-radius: 16px; padding: 16px 24px; margin-bottom: 12px; }
-.espace-demande h3 { margin: 0 0 4px; }
-.espace-demande p { margin: 4px 0; }
-.espace-statut { display: inline-block; padding: 2px 12px; border-radius: 999px; font-size: 14px; background: #eee; }
-.espace-statut-en-cours { background: #fde8c8; }
-.espace-statut-termine { background: #d6ecd9; }
+.stat-card {
+    background: #fffbf8;
+    border-radius: 20px;
+    padding: 1.5rem 1.8rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-nombre { font-size: 2.2rem; font-weight: 600; }
+.stat-label  { color: #a07f78; font-size: 0.95rem; }
+
+/* Liste des dernières demandes */
+.demande-card {
+    background: #fffbf8;
+    border-radius: 20px;
+    padding: 1.4rem 1.6rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.demande-card h3 { margin: 0 0 0.6rem; font-size: 1.2rem; }
+.demande-date    { margin: 0; color: #a07f78; }
+.vide            { color: #a07f78; }
+
+/* Badges de statut */
+.badge {
+    padding: 0.4rem 1.1rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+.badge-1 { background: #e6dcc9; } /* En attente */
+.badge-2 { background: #dfbcaa; } /* En cours */
+.badge-3 { background: #b9c9d6; } /* Acceptée */
+.badge-4 { background: #d9a3a3; } /* Refusée */
+.badge-5 { background: #94aa9c; } /* Terminée */
+
+/* Mobile : les cartes passent les unes sous les autres */
+@media (max-width: 700px) {
+    .stats { grid-template-columns: 1fr; }
+}
 
 /* Affichage mobile : les cartes passent les unes sous les autres */
 @media (max-width: 700px) { .espace-stats { grid-template-columns: 1fr; } }
