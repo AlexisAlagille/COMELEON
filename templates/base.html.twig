@@ -21,7 +21,7 @@
     <body>
         {% set currentRoute = app.request.attributes.get('_route') %}
         {% set panierCount = app.session.get('panier_prestations', [])|length %}
-        {% if currentRoute != 'app_espace' and not (currentRoute starts with 'app_espace_') %}
+        {% if currentRoute not in ['app_espace', 'app_gestion_demande', 'app_demande_modifier'] and not (currentRoute starts with 'app_espace_') %}
             <nav class="nav-bar">
                 <div class="nav-logo">
                     <img class="nav-bar-logo" src="/assets/img/logo_ia.png" alt="logo_entreprise">

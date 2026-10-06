@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier la demande{% endblock %}
+
+{% block body %}
+<div class="space-page">
+    <section class="espace">
+        <h1>Modifier la demande</h1>
+
+        <div class="demande-card">
+            <div>
+                <h3>{{ demande.description }}</h3>
+                <p class="demande-date">{{ demande.date|date('d/m/Y') }}</p>
+            </div>
+            <span class="badge badge-{{ demande.statut.idStatut }}">{{ demande.statut.libelleStatut }}</span>
+        </div>
+
+        <form method="post" class="form-gestion">
+            {# ! Jeton de sécurité obligatoire #}
+            <input type="hidden" name="_token" value="{{ csrf_token('modifier_demande_' ~ demande.id) }}">
+
+            <label for="statut">Nouveau statut</label>
+            <select name="statut" id="statut">
+                {% for statut in statuts %}
+                    <option value="{{ statut.idStatut }}" {{ statut.idStatut == demande.statut.idStatut ? 'selected' : '' }}>
+                        {{ statut.libelleStatut }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <div class="form-boutons">
+                <button type="submit" class="btn-modifier">Enregistrer</button>
+                <a href="{{ path('app_espace') }}" class="btn-annuler">Annuler</a>
+            </div>
+        </form>
+    </section>
+</div>
+{% endblock %}

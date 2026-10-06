@@ -1013,3 +1013,49 @@
 
 /* Affichage mobile : les cartes passent les unes sous les autres */
 @media (max-width: 700px) { .espace-stats { grid-template-columns: 1fr; } }
+
+/* ! Badge + bouton à droite de la carte */
+.demande-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.btn-modifier {
+    background: #1f2d27;
+    color: #fffbf8;
+    border: none;
+    border-radius: 999px;
+    padding: 0.4rem 1.1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* ! Formulaire de la page modifier */
+.form-gestion {
+    background: #fffbf8;
+    border-radius: 20px;
+    padding: 1.5rem 1.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.form-gestion select {
+    padding: 0.6rem;
+    border-radius: 10px;
+    border: 1px solid #dfbcaa;
+}
+
+.form-boutons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.btn-annuler {
+    color: #a07f78;
+    text-decoration: none;
+}

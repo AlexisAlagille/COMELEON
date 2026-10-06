@@ -32,14 +32,19 @@
         <h2>Dernières demandes</h2>
         {% for demande in demandes|slice(0, 3) %}
             <div class="demande-card">
-                <div>
-                    <h3>{{ demande.description }}</h3>
-                    <p class="demande-date">{{ demande.date|date('d/m/Y') }}</p>
-                </div>
-                <span class="badge badge-{{ demande.statut.idStatut }}">
-                    {{ demande.statut.libelleStatut }}
-                </span>
-            </div>
+    <div>
+        <h3>{{ demande.description }}</h3>
+        <p class="demande-date">{{ demande.date|date('d/m/Y') }}</p>
+    </div>
+
+    <div class="demande-actions">
+        {# ! Bouton visible seulement pour l'administrateur #}
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('app_gestion_demande', {id: demande.id}) }}" class="btn-modifier">Modifier</a>
+        {% endif %}
+        <span class="badge badge-{{ demande.statut.idStatut }}">{{ demande.statut.libelleStatut }}</span>
+    </div>
+</div>
         {% else %}
             <p class="vide">Aucune demande pour le moment.</p>
         {% endfor %}
