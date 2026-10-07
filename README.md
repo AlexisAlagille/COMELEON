@@ -2,6 +2,19 @@
 
 Site web de prise de rendez-vous pour un institut d'esthétique.
 
+<img width="1919" height="945" alt="Capture d&#39;écran 2026-10-07 163622" src="https://github.com/user-attachments/assets/3853be44-904d-4fc3-a8a3-adbda38dc0b9" />
+
+## Contexte
+Mr. X, désire augmenter sa visibilité sur internet pour booster son business. Cela devient impossible pour un entrepreneur de ne pas avoir de site en ligne.
+Il désire avoir un site moderne avec un style qui correspond à son activité.
+
+
+Forme de l'objet
+Il désire un site, accessible et ergonomique pour présenter son activité, que les clients puissent laisser des avis, consulter ses différentes prestations
+
+[Comeleon-Web_Symfony-Fiche Descriptive.docx](https://github.com/user-attachments/files/33162224/Comeleon-Web_Symfony-Fiche.Descriptive.docx)
+
+
 ## Prérequis
 
 - PHP >= 8.4
@@ -15,9 +28,9 @@ Sous Windows, après avoir installé [Scoop](https://scoop.sh/) : installez Symf
 scoop install symfony-cli
 ```
 
-Sous Linux, avec Homebrew : installer Symfony CLI avec PowerShell :
+Sous Linux, avec Homebrew : installer Symfony CLI :
 
-```powershell
+```bash
 brew install symfony-cli
 ```
 ## Fonctionnalités
@@ -77,7 +90,32 @@ brew install symfony-cli
    symfony server:start
 ```
 
-   Le site est alors accessible sur `https://127.0.0.1:8000`.
+Le site est alors accessible sur `https://127.0.0.1:8000`.
+
+## Architecture
+
+```text
+COMELEON/
+├── bin/                 Commandes Symfony
+├── config/              Configuration de Symfony et des bundles
+├── migrations/          Migrations de base de données
+├── public/              Point d’entrée du site et ressources publiques
+│   └── assets/          CSS, JavaScript et images
+├── src/                 Code PHP de l’application
+│   ├── Controller/      Contrôleurs et routes
+│   ├── Dto/             Objets de transfert de données
+│   ├── Entity/          Entités Doctrine
+│   ├── Form/            Formulaires Symfony
+│   ├── Repository/      Accès aux données
+│   └── Service/         Logique métier
+├── templates/           Pages et composants Twig
+├── composer.json        Dépendances et configuration PHP
+└── symfony.lock         Versions des recettes Symfony
+```
+
+## Source des Images (libres de droit)
+
+**https://www.pexels.com/fr-fr/**
 
 ## Auteur
 
