@@ -12,6 +12,11 @@
 
 <div class="space-page">
     <section class="espace">
+        <div class="stats">
+            <div class="stat-card">
+                <a href="{{ path('app_espace_prestation_ajouter') }}" class="btn-modifier">Ajouter</a>
+            </div>
+        </div>
         <h1>Prestations</h1>
 
         {% for prestation in prestations %}
