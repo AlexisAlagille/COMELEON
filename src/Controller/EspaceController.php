@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Repository\DemandeRepository;
+use App\Repository\PrestationRepository;
 
 
 final class EspaceController extends AbstractController
@@ -29,6 +30,17 @@ final class EspaceController extends AbstractController
         return $this->render('espace/index.html.twig', [
             'demandes' => $demandes,
             'statuts' => $statuts,
+        ]);
+    }
+    #[Route('/espace/prestation', name: 'app_espace_prestation')]
+    public function prestations(PrestationRepository $repository): Response
+    {
+        //! Toutes les prestations
+        $prestation = $repository->findAll();
+
+        return $this->render('espace/CRUD Prestations/showPrestations.html.twig', [
+            'controller_name' => 'EspaceController',
+            'prestations' => $prestation
         ]);
     }
 }

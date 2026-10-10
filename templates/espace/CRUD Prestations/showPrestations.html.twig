@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if is_granted('ROLE_ADMIN') %}
+        Espace Administrateur
+    {% else %}
+        Espace Client
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+
+<div class="space-page">
+    <section class="espace">
+        <h1>Prestations</h1>
+
+        {% for prestation in prestations %}
+            <div class="demande-card">
+    <div>
+        <img class="prestation-image" src="{{ asset('assets/img/prestations/' ~ prestation.image) }}" alt="{{ prestation.titre }}">
+        <h3>{{ prestation.titre }}</h3>
+        <p>{{ prestation.description }}</p>
+    </div>
+
+    <div class="prsetation-actions">
+        {# ! Bouton visible seulement pour l'administrateur #}
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="#" class="btn-modifier">Modifier</a>
+        {% endif %}
+    </div>
+</div>
+        {% else %}
+            <p class="vide">Aucune prestation pour le moment.</p>
+        {% endfor %}
+    </section>
+</div>
+
+{% endblock %}
