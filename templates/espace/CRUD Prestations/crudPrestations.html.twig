@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Ajouter une prestation{% endblock %}
+{# Utilisation de Ternaire pour déterminer l'édition ou l'ajout #}
+{% block title %}{{ is_edit ? 'Modifier' : 'Ajouter' }} une prestation{% endblock %}
 
 {% block body %}
 <div class="space-page">
     <section class="espace">
-        <h1>Ajouter une prestation</h1>
+        <h1>{{ is_edit ? 'Modifier' : 'Ajouter' }} une prestation</h1>
 
         {{ form_start(form) }}
             {{ form_row(form.titre) }}
@@ -15,7 +15,7 @@
             {{ form_row(form.categorie) }}
             {{ form_row(form.imageFile) }}
 
-            <button type="submit">Ajouter la prestation</button>
+            <button type="submit">{{ is_edit ? 'Enregistrer les modifications' : 'Ajouter la prestation' }}</button>
         {{ form_end(form) }}
     </section>
 </div>

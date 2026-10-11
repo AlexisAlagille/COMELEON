@@ -68,14 +68,8 @@ final class EspaceController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $imageFile = $form->get('imageFile')->getData();
-            if (!$imageFile instanceof UploadedFile) {
-                throw new \LogicException('Le formulaire valide doit contenir une image.');
-            }
 
             $extension = $imageFile->guessExtension();
-            if ($extension === null) {
-                throw new \RuntimeException('Impossible de déterminer le format de l’image envoyée.');
-            }
 
             $imageName = bin2hex(random_bytes(16)) . '.' . $extension;
             $imageFile->move($prestationImagesDirectory, $imageName);
@@ -90,8 +84,49 @@ final class EspaceController extends AbstractController
             return $this->redirectToRoute('app_espace_prestation');
         }
 
-        return $this->render('espace/CRUD Prestations/addPrestations.html.twig', [
+        return $this->render('espace/CRUD Prestations/crudPrestations.html.twig', [
             'form' => $form,
+            'is_edit' => false,
+        ]);
+    }
+
+    #[Route('/espace/prestation/{id<\d+>}/modifier', name: 'app_espace_prestation_modifier')]
+    public function editPrestation(
+        int $id,
+        PrestationRepository $repository,
+        Request $request,
+        EntityManagerInterface $em,
+        #[Autowire('%kernel.project_dir%/public/assets/img/prestations')]
+        string $prestationImagesDirectory
+    ): Response {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+        $prestation = $repository->find($id);
+
+        $form = $this->createForm(PrestationType::class, $prestation, [
+            'is_edit' => true,
+        ]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form->get('imageFile')->getData();
+            if ($imageFile instanceof UploadedFile) {
+                $extension = $imageFile->guessExtension();
+
+                $imageName = bin2hex(random_bytes(16)) . '.' . $extension;
+                $imageFile->move($prestationImagesDirectory, $imageName);
+                $prestation->setImage($imageName);
+            }
+
+            $em->flush();
+            $this->addFlash('success', 'La prestation a bien été modifiée.');
+
+            return $this->redirectToRoute('app_espace_prestation');
+        }
+
+        return $this->render('espace/CRUD Prestations/crudPrestations.html.twig', [
+            'form' => $form,
+            'is_edit' => true,
         ]);
     }
 }

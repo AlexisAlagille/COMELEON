@@ -17,6 +17,8 @@ class PrestationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $isEdit = $options['is_edit'];
+
         $builder
             ->add('titre', TextType::class, [
                 'label' => 'Titre',
@@ -39,9 +41,9 @@ class PrestationType extends AbstractType
                 'label' => 'Catégorie',
             ])
             ->add('imageFile', FileType::class, [
-                'label' => 'Image',
+                'label' => $isEdit ? 'Nouvelle image (facultatif)' : 'Image',
                 'mapped' => false,
-                'required' => true,
+                'required' => !$isEdit,
                 'constraints' => [
                     new Image(
                         maxSize: '5M',
@@ -59,6 +61,8 @@ class PrestationType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Prestation::class,
+            'is_edit' => false,
         ]);
+        $resolver->setAllowedTypes('is_edit', 'bool');
     }
 }

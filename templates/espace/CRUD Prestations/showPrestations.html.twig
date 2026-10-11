@@ -30,7 +30,7 @@
     <div class="prsetation-actions">
         {# ! Bouton visible seulement pour l'administrateur #}
         {% if is_granted('ROLE_ADMIN') %}
-            <a href="#" class="btn-modifier">Modifier</a>
+            <a href="{{ path('app_espace_prestation_modifier', {id: prestation.id}) }}" class="btn-modifier">Modifier</a>
         {% endif %}
     </div>
 </div>
