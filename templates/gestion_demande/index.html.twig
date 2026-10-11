@@ -11,6 +11,15 @@
             <div>
                 <h3>{{ demande.description }}</h3>
                 <p class="demande-date">{{ demande.date|date('d/m/Y') }}</p>
+                <p class="demande-date">{{ demande.date|date('d/m/Y') }}</p>
+
+                    {% if demande.prestations is not empty %}
+                        <ul>
+                            {% for prestation in demande.prestations %}
+                                <li>{{ prestation.titre }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
             </div>
             <span class="badge badge-{{ demande.statut.idStatut }}">{{ demande.statut.libelleStatut }}</span>
         </div>
