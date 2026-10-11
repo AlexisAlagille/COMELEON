@@ -33,6 +33,16 @@
                     <img class="prestation-image" src="{{ asset('assets/img/prestations/' ~ prestation.image) }}" alt="{{ prestation.titre }}">
                     <h3>{{ prestation.titre }}</h3>
                     <p>{{ prestation.description }}</p>
+                    <div class="prestation-meta">
+                        <span>
+                            <span class="prestation-meta-label">Prix</span>
+                            <strong>{{ prestation.prix is not null ? prestation.prix|number_format(2, ',', ' ') ~ ' €' : 'Non renseigné' }}</strong>
+                        </span>
+                        <span>
+                            <span class="prestation-meta-label">Durée</span>
+                            <strong>{{ prestation.duree is not null ? prestation.duree ~ ' min' : 'Non renseignée' }}</strong>
+                        </span>
+                    </div>
                 </div>
 
                 <div class="prsetation-actions">
