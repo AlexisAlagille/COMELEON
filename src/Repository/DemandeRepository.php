@@ -3,10 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Demande;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use App\Entity\User;
-use App\Repository\DemandeRepository;
 
 /**
  * @extends ServiceEntityRepository<Demande>
@@ -22,6 +21,8 @@ class DemandeRepository extends ServiceEntityRepository
     public function recupererDemandesParUtilisateur(User $user): array
     {
         return $this->createQueryBuilder('d')
+            ->addSelect('s')
+            ->join('d.statut', 's')
             ->where('d.user = :user')
             ->setParameter('user', $user)
             ->orderBy('d.id', 'DESC')
@@ -29,13 +30,11 @@ class DemandeRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function RecupererStatutDemandeParUtilisateur(User $user): array
+    public function recupererToutesLesDemandes(): array
     {
         return $this->createQueryBuilder('d')
-            ->select('s.libelleStatut')
+            ->addSelect('s')
             ->join('d.statut', 's')
-            ->where('d.user = :user')
-            ->setParameter('user', $user)
             ->orderBy('d.id', 'DESC')
             ->getQuery()
             ->getResult();

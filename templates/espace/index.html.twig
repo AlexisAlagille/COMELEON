@@ -12,7 +12,7 @@
 
 <div class="space-page">
     <section class="espace">
-        <h1>Mes demandes</h1>
+        <h1>{{ is_granted('ROLE_ADMIN') ? 'Toutes les demandes' : 'Mes demandes' }}</h1>
 
         {# Les 3 cartes #}
         <div class="stats">
@@ -30,9 +30,8 @@
             </div>
         </div>
 
-        {# Les 3 dernières demandes #}
-        <h2>Dernières demandes</h2>
-        {% for demande in demandes|slice(0, 3) %}
+        <h2>{{ is_granted('ROLE_ADMIN') ? 'Demandes' : 'Dernières demandes' }}</h2>
+        {% for demande in demandes %}
             <div class="demande-card">
     <div>
         <h3>{{ demande.description }}</h3>

@@ -1569,6 +1569,43 @@ body {
     cursor: pointer;
 }
 
+.prsetation-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.6rem;
+}
+
+.prsetation-actions form {
+    margin: 0;
+}
+
+.btn-supprimer {
+    background: #8b2f2f;
+    color: #fffbf8;
+    border: none;
+    border-radius: 999px;
+    padding: 0.4rem 1.1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-supprimer:disabled {
+    background: #999;
+    color: #eee;
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+.suppression-indisponible {
+    max-width: 13rem;
+    margin: 0;
+    color: #666;
+    font-size: 0.75rem;
+    text-align: right;
+}
+
 /* Formulaire de la page modifier */
 
 .form-gestion {

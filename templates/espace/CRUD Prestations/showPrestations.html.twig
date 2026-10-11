@@ -19,21 +19,48 @@
         </div>
         <h1>Prestations</h1>
 
-        {% for prestation in prestations %}
-            <div class="demande-card">
-    <div>
-        <img class="prestation-image" src="{{ asset('assets/img/prestations/' ~ prestation.image) }}" alt="{{ prestation.titre }}">
-        <h3>{{ prestation.titre }}</h3>
-        <p>{{ prestation.description }}</p>
-    </div>
+        {% for message in app.flashes('success') %}
+            <p class="flash-success">{{ message }}</p>
+        {% endfor %}
+        {% for message in app.flashes('error') %}
+            <p class="flash-error">{{ message }}</p>
+        {% endfor %}
 
-    <div class="prsetation-actions">
-        {# ! Bouton visible seulement pour l'administrateur #}
-        {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ path('app_espace_prestation_modifier', {id: prestation.id}) }}" class="btn-modifier">Modifier</a>
-        {% endif %}
-    </div>
-</div>
+        {% for prestation in prestations %}
+            {% set demandeUsedPresta = prestation.hasDemandesNonTerminees %}
+            <div class="demande-card">
+                <div>
+                    <img class="prestation-image" src="{{ asset('assets/img/prestations/' ~ prestation.image) }}" alt="{{ prestation.titre }}">
+                    <h3>{{ prestation.titre }}</h3>
+                    <p>{{ prestation.description }}</p>
+                </div>
+
+                <div class="prsetation-actions">
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('app_espace_prestation_modifier', {id: prestation.id}) }}" class="btn-modifier">Modifier</a>
+                        <form
+                            method="post"
+                            action="{{ path('app_espace_prestation_supprimer', {id: prestation.id}) }}"
+                            onsubmit="return confirm('Confirmer la suppression de cette prestation ?');"
+                        >
+                            <input type="hidden" name="_token" value="{{ csrf_token('supprimer_prestation_' ~ prestation.id) }}">
+                            <button
+                                type="submit"
+                                class="btn-supprimer"
+                                {% if demandeUsedPresta %}
+                                    disabled
+                                    title="Cette prestation est utilisée dans une ou plusieurs demandes non terminées"
+                                {% endif %}
+                            >
+                                Supprimer
+                            </button>
+                        </form>
+                        {% if demandeUsedPresta %}
+                            <p class="suppression-indisponible">Utilisée dans une ou plusieurs demandes non terminées</p>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
         {% else %}
             <p class="vide">Aucune prestation pour le moment.</p>
         {% endfor %}

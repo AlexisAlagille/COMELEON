@@ -6,7 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Entity\Demande;
 use App\Entity\Prestation;
+use App\Entity\User;
 use App\Form\PrestationType;
 use App\Repository\DemandeRepository;
 use App\Repository\PrestationRepository;
@@ -20,16 +22,17 @@ final class EspaceController extends AbstractController
     #[Route('/espace', name: 'app_espace')]
     public function index(DemandeRepository $demandeRepository): Response
     {
-        //! Utilisateur actuellement connecté
-        $user = $this->getUser();
+        if ($this->isGranted('ROLE_ADMIN')) {
+            $demandes = $demandeRepository->recupererToutesLesDemandes();
+        } else {
+            $user = $this->getUser();
 
-        //! Toutes les demandes de cet utilisateur
-        $demandes = $demandeRepository->recupererDemandesParUtilisateur($user);
+            $demandes = $demandeRepository->recupererDemandesParUtilisateur($user);
+        }
 
-        //! Les libellés des statuts, transformés en liste simple : ['En cours', 'Terminée', ...]
-        $statuts = array_column(
-            $demandeRepository->RecupererStatutDemandeParUtilisateur($user),
-            'libelleStatut'
+        $statuts = array_map(
+            static fn (Demande $demande): ?string => $demande->getStatut()?->getLibelleStatut(),
+            $demandes
         );
 
         //! Les clés sont les noms utilisés dans le template Twig
@@ -90,7 +93,7 @@ final class EspaceController extends AbstractController
         ]);
     }
 
-    #[Route('/espace/prestation/{id<\d+>}/modifier', name: 'app_espace_prestation_modifier')]
+    #[Route('/espace/prestation/{id}/modifier', name: 'app_espace_prestation_modifier')]
     public function editPrestation(
         int $id,
         PrestationRepository $repository,
@@ -112,7 +115,7 @@ final class EspaceController extends AbstractController
             $imageFile = $form->get('imageFile')->getData();
             if ($imageFile instanceof UploadedFile) {
                 $extension = $imageFile->guessExtension();
-
+                // On créer un nom d'image aléatoire pour éviter deux image au même nom créant un conflit //
                 $imageName = bin2hex(random_bytes(16)) . '.' . $extension;
                 $imageFile->move($prestationImagesDirectory, $imageName);
                 $prestation->setImage($imageName);
@@ -128,5 +131,34 @@ final class EspaceController extends AbstractController
             'form' => $form,
             'is_edit' => true,
         ]);
+    }
+
+    #[Route('/espace/prestation/{id}/supprimer', name: 'app_espace_prestation_supprimer')]
+    public function deletePrestation(
+        int $id,
+        PrestationRepository $repository,
+        Request $request,
+        EntityManagerInterface $em
+    ): Response {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+        if (!$this->isCsrfTokenValid('supprimer_prestation_'.$id, $request->request->get('_token'))) {
+            throw $this->createAccessDeniedException('Jeton CSRF invalide.');
+        }
+
+        $prestation = $repository->find($id);
+
+        if ($prestation->hasDemandesNonTerminees()) {
+            $this->addFlash('error', 'Cette prestation ne peut pas être supprimée car elle est utilisée dans une ou plusieurs demandes non terminées.');
+
+            return $this->redirectToRoute('app_espace_prestation');
+        }
+
+        $em->remove($prestation);
+        $em->flush();
+
+        $this->addFlash('success', 'La prestation a bien été supprimée.');
+
+        return $this->redirectToRoute('app_espace_prestation');
     }
 }
