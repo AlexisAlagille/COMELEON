@@ -138,7 +138,9 @@ final class EspaceController extends AbstractController
         int $id,
         PrestationRepository $repository,
         Request $request,
-        EntityManagerInterface $em
+        EntityManagerInterface $em,
+        #[Autowire('%kernel.project_dir%/public/assets/img/prestations')]
+        string $prestationImagesDirectory
     ): Response {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
@@ -147,6 +149,9 @@ final class EspaceController extends AbstractController
         }
 
         $prestation = $repository->find($id);
+        if (!$prestation) {
+            throw $this->createNotFoundException('Prestation introuvable.');
+        }
 
         if ($prestation->hasDemandesNonTerminees()) {
             $this->addFlash('error', 'Cette prestation ne peut pas être supprimée car elle est utilisée dans une ou plusieurs demandes non terminées.');
@@ -154,10 +159,21 @@ final class EspaceController extends AbstractController
             return $this->redirectToRoute('app_espace_prestation');
         }
 
+        $imageName = $prestation->getImage();
         $em->remove($prestation);
         $em->flush();
 
-        $this->addFlash('success', 'La prestation a bien été supprimée.');
+        $imagePath = $prestationImagesDirectory . DIRECTORY_SEPARATOR . $imageName;
+        $imageDeleted = !$imageName || (
+            basename($imageName) === $imageName
+            && (!is_file($imagePath) || @unlink($imagePath))
+        );
+        $this->addFlash(
+            $imageDeleted ? 'success' : 'error',
+            $imageDeleted
+                ? 'La prestation a bien été supprimée.'
+                : "La prestation a été supprimée, mais son image n'a pas pu être supprimée."
+        );
 
         return $this->redirectToRoute('app_espace_prestation');
     }
