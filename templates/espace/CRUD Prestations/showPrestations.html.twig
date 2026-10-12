@@ -12,7 +12,7 @@
 
 <div class="space-page">
     <section class="espace">
-        <div class="stats">
+        <div class="stats stats--single">
             <div class="stat-card">
                 <a href="{{ path('app_espace_prestation_ajouter') }}" class="btn-modifier">Ajouter</a>
             </div>
@@ -45,7 +45,7 @@
                     </div>
                 </div>
 
-                <div class="prsetation-actions">
+                <div class="prestation-actions">
                     {% if is_granted('ROLE_ADMIN') %}
                         <a href="{{ path('app_espace_prestation_modifier', {id: prestation.id}) }}" class="btn-modifier">Modifier</a>
                         <form

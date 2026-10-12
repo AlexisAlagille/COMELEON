@@ -3,7 +3,7 @@
 {% block title %}Hello PrestationsController!{% endblock %}
 
 {% block body %}
-<div class = "Txt-Prestation">
+<div class="txt-prestation">
 <br>
 
 <h1>Nos Prestations</h1>
@@ -26,7 +26,7 @@
 
             <p>{{ prestation.description }}</p>
 
-            <p>{{ prestation.duree }} min</p>
+            <p class="card-duration">{{ prestation.duree }} min</p>
 
             <p>{{ prestation.prix }} €</p>
 
