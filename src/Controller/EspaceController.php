@@ -9,9 +9,12 @@ use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\Demande;
 use App\Entity\Prestation;
 use App\Entity\User;
+use App\Entity\Avis;
 use App\Form\PrestationType;
+use App\Form\AvisType;
 use App\Repository\DemandeRepository;
 use App\Repository\PrestationRepository;
+use App\Repository\AvisRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -176,5 +179,61 @@ final class EspaceController extends AbstractController
         );
 
         return $this->redirectToRoute('app_espace_prestation');
+    }
+
+    #[Route('/espace/avis', name: 'app_espace_avis')]
+    public function avis(PrestationRepository $prestationRepository,AvisRepository $avisRepository): Response
+    {
+        $prestations = $prestationRepository->findAll();
+        $avis = $avisRepository->findAvis();
+
+        return $this->render('espace/CRUD Avis/showAvis.html.twig', [
+            'controller_name' => 'EspaceController',
+            'prestations' => $prestations,
+            'avis' => $avis,
+        ]);
+    }
+
+    #[Route('/espace/avis/{id}/ajouter', name: 'app_espace_avis_ajouter')]
+    public function addAvis(
+        int $id,
+        Request $request,
+        DemandeRepository $demandeRepository,
+        EntityManagerInterface $em
+    ): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_CLIENT');
+
+        $user = $this->getUser();
+        if (!$user instanceof User) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $demande = $demandeRepository->find($id);
+        if (!$demande) {
+            throw $this->createNotFoundException('Demande introuvable.');
+        }
+        if ($demande->getUser() !== $user) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $avis = new Avis();
+        $form = $this->createForm(AvisType::class, $avis);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $avis->setUser($user);
+            $avis->setDemande($demande);
+            $avis->setDateAvis(new \DateTimeImmutable());
+            $em->persist($avis);
+            $em->flush();
+
+            $this->addFlash("success", "L'avis a bien été créée.");
+
+            return $this->redirectToRoute('app_espace');
+        }
+        return $this->render('espace/CRUD Avis/addAvis.html.twig', [
+            'form' => $form
+        ]);
     }
 }

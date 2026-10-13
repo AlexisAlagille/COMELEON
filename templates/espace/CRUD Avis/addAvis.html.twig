@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un avis{% endblock %}
+
+{% block body %}
+<div class="space-page">
+    <section class="espace">
+        <h1>Ajouter un avis</h1>
+
+        {{ form_start(form) }}
+            {{ form_row(form.note, {'row_attr': {'class': 'field--full'}}) }}
+            {{ form_row(form.commentaire, {'row_attr': {'class': 'field--full'}}) }}
+            <button type="submit">Ajouter l'avis</button>
+        {{ form_end(form) }}
+    </section>
+</div>
+{% endblock %}

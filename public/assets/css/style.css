@@ -1207,6 +1207,26 @@ body {
     background: var(--bg-card);
 }
 
+.avis-demande-card {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.avis-demande-details,
+.avis-details {
+    min-width: 0;
+}
+
+.avis-info-block {
+    padding: 1.4rem 1.6rem;
+    border: 1px solid var(--border-warm);
+    border-radius: var(--radius-xl);
+    background: var(--bg-card);
+    box-shadow: 0 4px 14px rgba(31, 45, 39, 0.05);
+}
+
 .demande-card h3 {
     margin: 0 0 0.6rem;
     font-size: 1.2rem;
@@ -1646,6 +1666,10 @@ body {
 }
 
 @media (max-width: 600px) {
+    .avis-demande-card {
+        grid-template-columns: 1fr;
+    }
+
     .prestations {
         grid-template-columns: 1fr;
     }

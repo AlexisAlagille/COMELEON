@@ -46,12 +46,18 @@
     </div>
 
     <div class="demande-actions">
-        {# ! Bouton visible seulement pour l'administrateur #}
-        {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ path('app_gestion_demande', {id: demande.id}) }}" class="btn-modifier">Modifier</a>
-        {% endif %}
-        <span class="badge badge-{{ demande.statut.idStatut }}">{{ demande.statut.libelleStatut }}</span>
-    </div>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('app_gestion_demande', {id: demande.id}) }}" class="btn-modifier">
+            Modifier
+        </a>
+    {% elseif is_granted('ROLE_CLIENT') %}
+        <a type="button" class="btn-modifier" href="{{path('app_espace_avis_ajouter', {id: demande.id})}}">Donner un avis</a>
+    {% endif %}
+
+    <span class="badge badge-{{ demande.statut.idStatut }}">
+        {{ demande.statut.libelleStatut }}
+    </span>
+</div>
 </div>
         {% else %}
             <p class="vide">Aucune demande pour le moment.</p>
