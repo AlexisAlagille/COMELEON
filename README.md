@@ -44,6 +44,8 @@ brew install symfony-cli
 ### Côté administrateur
 - Tableau de bord des rendez-vous
 - Gestion des utilisateurs (passage Client / Admin)
+- Gestion des prestations (CRUD)
+- Consultation de tous les avis
 
 ## Stack technique
 
