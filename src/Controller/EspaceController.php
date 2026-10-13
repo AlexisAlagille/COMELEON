@@ -184,8 +184,17 @@ final class EspaceController extends AbstractController
     #[Route('/espace/avis', name: 'app_espace_avis')]
     public function avis(PrestationRepository $prestationRepository,AvisRepository $avisRepository): Response
     {
+        $user = $this->getUser();
+
+        if ($this->isGranted('ROLE_ADMIN')) {
+            $avis = $avisRepository->findAvis();
+        } 
+        else {
+
+            $avis = $avisRepository->findAvisUser($user->getId());
+        }
         $prestations = $prestationRepository->findAll();
-        $avis = $avisRepository->findAvis();
+        
 
         return $this->render('espace/CRUD Avis/showAvis.html.twig', [
             'controller_name' => 'EspaceController',

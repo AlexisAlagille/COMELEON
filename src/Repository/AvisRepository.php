@@ -48,4 +48,17 @@ class AvisRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findAvisUser(int $id): array
+    {
+        return $this->createQueryBuilder('avis')
+            ->addSelect('demande', 'user')
+            ->innerJoin('avis.demande', 'demande')
+            ->innerJoin('avis.user', 'user')
+            ->where('user.id = :id')
+            ->setParameter('id', $id)
+            ->orderBy('avis.dateAvis', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 }
