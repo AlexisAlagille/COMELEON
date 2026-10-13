@@ -50,7 +50,7 @@
         <a href="{{ path('app_gestion_demande', {id: demande.id}) }}" class="btn-modifier">
             Modifier
         </a>
-    {% elseif is_granted('ROLE_CLIENT') %}
+    {% elseif is_granted('ROLE_CLIENT') and demande.avis is empty %}
         <a type="button" class="btn-modifier" href="{{path('app_espace_avis_ajouter', {id: demande.id})}}">Donner un avis</a>
     {% endif %}
 
