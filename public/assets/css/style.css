@@ -703,14 +703,10 @@ body {
 
 .carte-contenu {
     position: absolute;
-
-    top: 0;
-
-    left: 0;
-
+    inset: 0;
     z-index: 2;
-
     padding: 28px;
+    box-sizing: border-box;
 }
 
 .carte-contenu h2,
@@ -1979,10 +1975,13 @@ body {
 }
 
 .prestation-details {
+    position: absolute;
+    right: 28px;
+    bottom: 108px;
+    left: 28px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-
 }
 
 .nav-actions {
@@ -2006,7 +2005,6 @@ body {
 
 .card-section card-section--accueil .prestation-price
 {
-    margin-top: 15px;
     color: var(--red-price);
     font-size: 50px;
 
@@ -2018,9 +2016,5 @@ body {
 .prestation-details .carte-duration,
 .prestation-details .prestation-price {
     font-size: 35px;
-}
-
-.carte-duration,
-.prestation-price {
-    margin: 0;
+    margin-bottom: -25px;
 }
