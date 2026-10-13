@@ -27,7 +27,9 @@
         {% if currentRoute not in ['app_espace', 'app_gestion_demande', 'app_demande_modifier','app_gestion_utilisateur'] and not (currentRoute starts with 'app_espace_') %}
             <nav class="nav-bar">
                 <div class="nav-logo">
+                    <a href="{{path("app_accueil")}}">
                     <img class="nav-bar-logo" src="/assets/img/logo_ia.png" alt="logo_entreprise">
+                    </a>
                     <h1>Eclat & Vous</h1>
                 </div>
 
@@ -57,12 +59,14 @@
         {% else %}
             <nav class="space-nav">
                 <div class="space-nav-logo">
+                    <a href="{{ path('app_accueil') }}">
                     <img class="space-nav-bar-logo" src="/assets/img/logo_ia.png" alt="logo_entreprise">
+                    </a>
                     <h1>Eclat & Vous</h1>
                 </div>
 
                 <div class="space-nav-item-list">
-                    <a href="{{ path('app_espace') }}" class="space-nav-button{% if currentRoute == 'app_espace' %} is-active{% endif %}">Tableau de bord</a>
+                    <a href="{{ path('app_espace') }}" class="space-nav-button{% if currentRoute == 'app_espace' %} is-active{% endif %}">Tableau de board</a>
                     {% if is_granted('ROLE_ADMIN') %}
                         <a href="{{path('app_espace_prestation')}}" class="space-nav-button{% if currentRoute == 'app_espace_prestation' %} is-active{% endif %}">Gestion Prestations</a>
                     {% endif %}
@@ -72,7 +76,9 @@
                     {% if is_granted('ROLE_ADMIN') %}
                         <a href="{{ path('app_gestion_utilisateur') }}" class="space-nav-button{% if currentRoute == 'app_gestion_utilisateur' %} is-active{% endif %}">Gérer les utilisateurs</a>
                     {% endif %}
-                    <a href="{{ path('app_logout') }}" class="space-nav-button space-nav-logout">Déconnexion</a>
+                    <a href="javascript:history.back()" class="space-nav-button space-nav-logout">&larr; Retour en arrière</a>
+                   
+                    
                 </div>
             </nav>
         {% endif %}
