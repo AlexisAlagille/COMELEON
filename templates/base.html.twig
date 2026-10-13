@@ -70,7 +70,7 @@
                     {% if is_granted('ROLE_ADMIN') %}
                         <a href="{{path('app_espace_prestation')}}" class="space-nav-button{% if currentRoute == 'app_espace_prestation' %} is-active{% endif %}">Gestion Prestations</a>
                     {% endif %}
-                    <a href="{{path('app_espace_avis')}}" class="space-nav-button">Avis</a>
+                    <a href="{{path('app_espace_avis')}}" class="space-nav-button{% if currentRoute == 'app_espace_avis' %} is-active{% endif %}">Avis</a>
                     <a href="{{ path('app_panier') }}" class="space-nav-button">Panier{% if panierCount > 0 %} ({{ panierCount }}){% endif %}</a>
                     <a href="{{ path('app_demande') }}" class="space-nav-button">Créer une demande</a>
                     {% if is_granted('ROLE_ADMIN') %}

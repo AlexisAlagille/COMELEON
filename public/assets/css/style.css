@@ -304,7 +304,6 @@ body {
     box-sizing: border-box;
     color: var(--green-tint); /* à vérifier : contraste dépendant de l'image */
     text-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-
 }
 
 .hero-content h1 {
@@ -1884,7 +1883,11 @@ body {
     }
 }
 
-@media (max-width: 700px) { .espace-stats { grid-template-columns: 1fr; } }
+@media (max-width: 700px) {
+    .espace-stats {
+        grid-template-columns: 1fr;
+    }
+}
 
 /* Gestion des utilisateurs */
 .space-page .espace table {
@@ -2003,8 +2006,7 @@ body {
     background: var(--red-error);
 }
 
-.card-section card-section--accueil .prestation-price
-{
+.card-section card-section--accueil .prestation-price {
     color: var(--red-price);
     font-size: 50px;
 
