@@ -46,7 +46,7 @@
             {% if is_granted('ROLE_CLIENT') %}
                 <a class="panier-primary-link" href="{{ path('app_demande') }}">Créer la demande</a>
             {% else %}
-                <a class="panier-primary-link" href="{{ path('app_login') }}">Connexion pour continuer</a>
+                <a class="panier-primary-link" href="{{ path('app_demande') }}">Connexion pour continuer</a>
             {% endif %}
         </section>
     {% endif %}
