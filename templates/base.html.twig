@@ -35,19 +35,23 @@
                     <a href="{{path("app_accueil")}}">Accueil</a>
                     <a href="{{path("app_prestations")}}">Prestations</a>
                     <a href="{{ path('app_panier') }}">Panier{% if panierCount > 0 %} <span class="cart-count">{{ panierCount }}</span>{% endif %}</a>
-                    {% if app.user %}
-                        <a href="{{ path('app_demande')}}">Créer une demande</a>
-                        <a href="{{ path('app_logout') }}">Déconnexion</a>
-                    {% else %}
-                        <a href="{{ path('app_login') }}">Connexion</a>
-                    {% endif %}
+                    <a href="{{ path('app_demande')}}">Créer une demande</a>
+                  
                 </div>
 
+               <div class="nav-actions">
                 {% if is_granted('ROLE_ADMIN') %}
-                    <a href="{{path('app_espace')}}" class="nav-button">Espace Administrateur</a>
+                    <a href="{{ path('app_espace') }}" class="nav-button">Espace Administrateur</a>
                 {% elseif is_granted('ROLE_CLIENT') %}
-                    <a href="{{path('app_espace')}}" class="nav-button">Espace Client</a>
+                    <a href="{{ path('app_espace') }}" class="nav-button">Espace Client</a>
                 {% endif %}
+
+                {% if app.user %}
+                    <a href="{{ path('app_logout') }}" class="nav-button nav-auth-button">Déconnexion</a>
+                {% else %}
+                    <a href="{{ path('app_login') }}" class="nav-button nav-auth-button">Connexion</a>
+                {% endif %}
+</div>
             </nav>
        
         {% else %}

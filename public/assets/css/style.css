@@ -35,6 +35,7 @@
     --text-muted-green: #69766f;
     --text-warm: #766d65;
     --accent-warm: #a07f78;
+    --red-price: #fafffa;
 
     /* Fonds */
     --bg-page: #f7f9f8;
@@ -52,6 +53,7 @@
     /* Danger */
     --danger: #8b2f2f;
     --danger-dark: #702424;
+    --red-error: #fe0015;
 
     /* Formes & ombres */
     --radius-sm: 6px;
@@ -300,8 +302,9 @@ body {
     padding: 20px 48px;
 
     box-sizing: border-box;
-    color: var(--green); /* à vérifier : contraste dépendant de l'image */
-    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.6);
+    color: var(--green-tint); /* à vérifier : contraste dépendant de l'image */
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+
 }
 
 .hero-content h1 {
@@ -394,7 +397,7 @@ body {
 
 .card p {
     color: var(--text-muted);
-    font-size: 14px;
+    font-size: 20px;
 
     line-height: 1.6;
 }
@@ -1947,4 +1950,51 @@ body {
     .space-page .espace table {
         min-width: 700px;
     }
+}
+
+.prestation-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    justify-self: end;
+    gap: 16px;
+    white-space: nowrap;
+}
+
+.nav-actions a {
+    white-space: nowrap;
+}
+.nav-auth-button {
+    background: var(--green);
+}
+
+.nav-auth-button:hover {
+    background: var(--red-error);
+}
+
+.card-section card-section--accueil .prestation-price
+{
+    margin-top: 15px;
+    color: var(--red-price);
+    font-size: 50px;
+
+    font-weight: 600;
+    box-shadow: ghostwhite;
+    background-color: rgba(0, 0, 0, 0.017);
+    border-radius: 8px;
+}
+.prestation-details .carte-duration,
+.prestation-details .prestation-price {
+    font-size: 35px;
+}
+
+.carte-duration,
+.prestation-price {
+    margin: 0;
 }
