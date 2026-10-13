@@ -1210,13 +1210,15 @@ body {
 .avis-demande-card {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-    margin-bottom: 1rem;
+    gap: 5px;
+    padding: 1rem 0;
+    margin-bottom: 3rem;
 }
 
 .avis-demande-details,
 .avis-details {
     min-width: 0;
+    scale: calc(95%);
 }
 
 .avis-info-block {
