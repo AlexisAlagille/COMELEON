@@ -18,13 +18,16 @@ use App\Repository\AvisRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\UX\Pagination\PaginatorInterface;
+
 
 
 final class EspaceController extends AbstractController
 {
     #[Route('/espace', name: 'app_espace')]
-    public function index(DemandeRepository $demandeRepository): Response
+    public function index(DemandeRepository $demandeRepository, PaginatorInterface $paginator): Response
     {
+        
         if ($this->isGranted('ROLE_ADMIN')) {
             $demandes = $demandeRepository->recupererToutesLesDemandes();
         } else {
@@ -32,23 +35,30 @@ final class EspaceController extends AbstractController
 
             $demandes = $demandeRepository->recupererDemandesParUtilisateur($user);
         }
-
-        $statuts = array_map(
+                $statuts = array_map(
             static fn (Demande $demande): ?string => $demande->getStatut()?->getLibelleStatut(),
             $demandes
         );
+        
+        $demandes = $paginator->paginate($demandes, perPage: 5);
+
+        
+
 
         //! Les clés sont les noms utilisés dans le template Twig
         return $this->render('espace/index.html.twig', [
             'demandes' => $demandes,
             'statuts' => $statuts,
         ]);
+
     }
+
     #[Route('/espace/prestation', name: 'app_espace_prestation')]
-    public function prestations(PrestationRepository $repository): Response
+    public function prestations(PrestationRepository $repository, PaginatorInterface $paginator): Response
     {
         //! Toutes les prestations
         $prestation = $repository->findAll();
+        $prestation = $paginator->paginate($prestation, perPage: 5);
 
         return $this->render('espace/CRUD Prestations/showPrestations.html.twig', [
             'controller_name' => 'EspaceController',
@@ -182,7 +192,7 @@ final class EspaceController extends AbstractController
     }
 
     #[Route('/espace/avis', name: 'app_espace_avis')]
-    public function avis(PrestationRepository $prestationRepository,AvisRepository $avisRepository): Response
+    public function avis(PrestationRepository $prestationRepository,AvisRepository $avisRepository, PaginatorInterface $paginator): Response
     {
         $user = $this->getUser();
 
@@ -193,6 +203,7 @@ final class EspaceController extends AbstractController
 
             $avis = $avisRepository->findAvisUser($user->getId());
         }
+        $avis = $paginator->paginate($avis, perPage: 10);
         $prestations = $prestationRepository->findAll();
         
 
@@ -201,6 +212,7 @@ final class EspaceController extends AbstractController
             'prestations' => $prestations,
             'avis' => $avis,
         ]);
+        
     }
 
     #[Route('/espace/avis/{id}/ajouter', name: 'app_espace_avis_ajouter')]

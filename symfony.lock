@@ -154,6 +154,9 @@
             "./templates/base.html.twig"
         ]
     },
+    "symfony/ux-pagination": {
+        "version": "v3.6.0"
+    },
     "symfony/validator": {
         "version": "8.1",
         "recipe": {
