@@ -1858,3 +1858,93 @@ body {
         height: 34px;
     }
 }
+
+@media (max-width: 700px) { .espace-stats { grid-template-columns: 1fr; } }
+
+/* Gestion des utilisateurs */
+.space-page .espace table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fffbf8;
+    border-radius: 14px;
+    overflow: hidden;
+    color: #1f2d27;
+}
+
+.space-page .espace th,
+.space-page .espace td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid #e8e1db;
+}
+
+.space-page .espace th {
+    background: #1e2d26;
+    color: #fffbf8;
+    font-weight: 600;
+}
+
+.space-page .espace tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.space-page .espace tbody tr:hover {
+    background: #f5eee8;
+}
+
+.space-page .espace td form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.space-page .espace select {
+    padding: 16px 12px;
+    border: 1px solid #cfc4ba;
+    border-radius: 8px;
+    background: #fff;
+    color: #1f2d27;
+    font: inherit;
+}
+
+.space-page .espace button {
+    padding: 9px 15px;
+    border: none;
+    border-radius: 999px;
+    background: #1f2d27;
+    color: #fffbf8;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.space-page .espace button:hover {
+    background: #354a3f;
+}
+
+.space-page .flash-success,
+.space-page .flash-error {
+    margin: 0 0 16px;
+    padding: 10px 12px;
+    border-radius: 10px;
+}
+
+.space-page .flash-success {
+    background: #e5f3e8;
+    color: #245b32;
+}
+
+.space-page .flash-error {
+    background: #fbe7e5;
+    color: #8a2e27;
+}
+
+@media (max-width: 700px) {
+    .space-page .espace {
+        overflow-x: auto;
+    }
+
+    .space-page .espace table {
+        min-width: 700px;
+    }
+}
