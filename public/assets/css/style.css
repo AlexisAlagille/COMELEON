@@ -2002,6 +2002,17 @@ body {
     gap: 10px;
 }
 
+.space-page .espace .user-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.space-page .espace .user-actions form {
+    margin: 0;
+}
+
 .space-page .espace select {
     padding: 16px 12px;
     border: 1px solid #cfc4ba;
@@ -2020,10 +2031,15 @@ body {
     font: inherit;
     font-weight: 600;
     cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
 .space-page .espace button:hover {
     background: #354a3f;
+}
+
+.space-page .espace .user-delete-form button:hover {
+    background: #b42318;
 }
 
 .space-page .flash-success,
