@@ -58,11 +58,16 @@
         {{ demande.statut.libelleStatut }}
     </span>
 </div>
+
 </div>
         {% else %}
             <p class="vide">Aucune demande pour le moment.</p>
         {% endfor %}
     </section>
+    <div>
+        {{ ux_pagination(demandes)}}
+    </div>
+    
 </div>
 
 {% endblock %}

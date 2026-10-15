@@ -1227,6 +1227,82 @@ body {
     box-shadow: 0 4px 14px rgba(31, 45, 39, 0.05);
 }
 
+.space-page .ux-pagination {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+}
+
+.space-page .ux-pagination__info {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.space-page .ux-pagination__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.space-page .ux-pagination__link {
+    display: inline-flex;
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 0.45rem 0.75rem;
+    border: 1px solid var(--border-warm);
+    border-radius: var(--radius-md);
+    background: var(--bg-card);
+    color: var(--green);
+    font-weight: 600;
+    text-decoration: none;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.space-page a.ux-pagination__link:hover {
+    transform: translateY(-1px);
+    border-color: var(--green);
+    background: var(--green-tint);
+}
+
+.space-page .ux-pagination__link--current {
+    border-color: var(--green);
+    background: var(--green);
+    color: #fff;
+    cursor: default;
+}
+
+.space-page .ux-pagination__link--disabled {
+    background: var(--bg-espace);
+    color: var(--text-muted);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.space-page .ux-pagination__ellipsis {
+    padding: 0.45rem 0.2rem;
+    color: var(--text-muted);
+}
+
+.space-page .ux-pagination a.ux-pagination__link:focus-visible {
+    outline: 3px solid var(--green-focus);
+    outline-offset: 2px;
+}
+
 .demande-card h3 {
     margin: 0 0 0.6rem;
     font-size: 1.2rem;
