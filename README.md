@@ -94,6 +94,18 @@ brew install symfony-cli
 
 Le site est alors accessible sur `https://127.0.0.1:8000`.
 
+## Base de données
+
+- [Structure et données de base (comeleon.sql)](https://github.com/AlexisAlagille/COMELEON/releases/download/database/comeleon.sql)
+- [Jeu de test (jeu_de_test.sql)](https://github.com/AlexisAlagille/COMELEON/releases/download/database/jeu_de_test.sql)
+
+### Comptes de test
+| Rôle   | Email              | Mot de passe  |
+|--------|--------------------|---------------|
+| Admin  | admin@comeleon.fr  | Admin@2026!   |
+| Client | client@comeleon.fr | Client@2026!  |
+
+
 ## Architecture
 
 ```text
@@ -114,6 +126,7 @@ COMELEON/
 ├── composer.json        Dépendances et configuration PHP
 └── symfony.lock         Versions des recettes Symfony
 ```
+
 
 ## Source des Images (libres de droit)
 
