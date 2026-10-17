@@ -44,7 +44,6 @@
     --bg-card: #fffbf8;
     --bg-white: #fff;
     --bg-sidebar: #1e2d26;
-    --bg-auth-info: #f7d7dd;
 
     /* Bordures */
     --border: #e1e8e4;
@@ -541,7 +540,9 @@ body {
 }
 
 .auth-container .auth-panel--info {
-    background: var(--bg-auth-info);
+    background:
+        linear-gradient(rgba(22, 38, 31, 0.5), rgba(22, 38, 31, 0.5)),
+        url('../img/auth-background.jpg') center / cover;
 }
 
 .auth-container .auth-panel--form {
@@ -556,6 +557,7 @@ body {
 
 .auth-container .auth-panel--info h1 {
     margin-bottom: 10px;
+    color: #fff;
 }
 
 .auth-container .auth-panel--form h1 {
@@ -563,7 +565,7 @@ body {
 }
 
 .auth-container .auth-panel--info p {
-    color: #555;
+    color: rgba(255, 255, 255, 0.94);
     font-size: 16px;
 }
 
