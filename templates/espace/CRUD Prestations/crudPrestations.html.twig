@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+{# Utilisation de Ternaire pour déterminer l'édition ou l'ajout #}
+{% block title %}{{ is_edit ? 'Modifier' : 'Ajouter' }} une prestation{% endblock %}
+
+{% block body %}
+<div class="space-page">
+    <section class="espace">
+        <h1>{{ is_edit ? 'Modifier' : 'Ajouter' }} une prestation</h1>
+
+        {{ form_start(form) }}
+            {{ form_row(form.titre, {'row_attr': {'class': 'field--full'}}) }}
+            {{ form_row(form.description, {'row_attr': {'class': 'field--full'}}) }}
+            {{ form_row(form.duree) }}
+            {{ form_row(form.prix) }}
+            {{ form_row(form.categorie) }}
+            {{ form_row(form.imageFile, {'row_attr': {'class': 'field--full'}}) }}
+
+            <button type="submit">{{ is_edit ? 'Enregistrer les modifications' : 'Ajouter la prestation' }}</button>
+        {{ form_end(form) }}
+    </section>
+</div>
+{% endblock %}

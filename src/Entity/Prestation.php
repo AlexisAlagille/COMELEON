@@ -64,6 +64,17 @@ class Prestation
 
     public function getDemandes(): Collection { return $this->demandes; }
 
+    public function hasDemandesNonTerminees(): bool
+    {
+        foreach ($this->demandes as $demande) {
+            if ($demande->getStatut()?->getLibelleStatut() !== 'Terminée') {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public function addDemande(Demande $demande): self
     {
         if (!$this->demandes->contains($demande)) {

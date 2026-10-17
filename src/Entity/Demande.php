@@ -44,9 +44,13 @@ class Demande
     #[ORM\OneToOne(mappedBy: 'demande', cascade: ['persist', 'remove'])]
     private ?Reponse $reponse = null;
 
+    #[ORM\OneToMany(mappedBy: 'demande', targetEntity: Avis::class)]
+    private Collection $avis;
+
     public function __construct()
     {
         $this->prestations = new ArrayCollection();
+        $this->avis = new ArrayCollection();
     }
 
     public function getId(): ?int { return $this->id; }
@@ -93,5 +97,10 @@ class Demande
             $reponse->setDemande($this);
         }
         return $this;
+    }
+
+    public function getAvis(): Collection
+    {
+        return $this->avis;
     }
 }

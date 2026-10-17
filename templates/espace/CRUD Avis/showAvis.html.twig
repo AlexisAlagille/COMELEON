@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if is_granted('ROLE_ADMIN') %}
+        Espace Administrateur
+    {% else %}
+        Espace Client
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+
+<div class="space-page">
+    <section class="espace">
+        <h1>Avis</h1>
+
+        {% for message in app.flashes('success') %}
+            <p class="flash-success">{{ message }}</p>
+        {% endfor %}
+        {% for message in app.flashes('error') %}
+            <p class="flash-error">{{ message }}</p>
+        {% endfor %}
+
+        {% for unAvis in avis %}
+            <div class="avis-demande-card">
+                <div class="avis-demande-details avis-info-block">
+                    <h3>{{ unAvis.demande.description }}</h3>
+                    <p class="demande-date">{{ unAvis.demande.date|date('d/m/Y') }}</p>
+                    {% if unAvis.demande.prestations is not empty %}
+                        <ul>
+                        {% for prestation in unAvis.demande.prestations %}
+                            <li>{{ prestation.titre }}</li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+
+                <div class="avis-details avis-info-block">
+                    <div class="avis-note">
+                        {% for etoile in 1..5 %}
+                            <span aria-hidden="true"{% if etoile <= unAvis.note %} class="is-filled"{% endif %}>★</span>
+                        {% endfor %}
+                    </div>
+                    <p class="avis-commentaire">{{ unAvis.commentaire }}</p>
+                    <p class="avis-auteur">{{ unAvis.user.prenom }} {{ unAvis.user.nom }}</p>
+                    <p class="avis-date">Avis du {{ unAvis.dateAvis|date('d/m/Y') }}</p>
+                </div>
+            </div>
+        {% else %}
+            <p class="vide">Aucun avis pour le moment.</p>
+        {% endfor %}
+    </section>
+    <div>
+        {{ ux_pagination(avis)}}
+    </div>
+</div>
+
+{% endblock %}

@@ -21,11 +21,44 @@ class AvisRepository extends ServiceEntityRepository
         return $this->getEntityManager()
             ->getConnection()
             ->createQueryBuilder()
-            ->select('a.note', 'a.commentaire', 'a.date_avis AS dateAvis', 'u.prenom AS prenomAuteur', 'u.nom AS nomAuteur')
+            ->select(
+                'a.note',
+                'a.commentaire',
+                'a.date_avis AS dateAvis',
+                'u.prenom AS prenomAuteur',
+                'u.nom AS nomAuteur',
+                'd.description AS demandeDescription',
+                'd.date AS demandeDate'
+            )
             ->from('avis', 'a')
             ->innerJoin('a', 'user', 'u', 'u.id = a.user_id')
+            ->innerJoin('a', 'demande', 'd', 'd.id = a.demande_id')
             ->orderBy('a.date_avis', 'DESC')
             ->setMaxResults($limit)
             ->fetchAllAssociative();
+    }
+
+    public function findAvis(): array
+    {
+        return $this->createQueryBuilder('avis')
+            ->addSelect('demande', 'user')
+            ->innerJoin('avis.demande', 'demande')
+            ->innerJoin('avis.user', 'user')
+            ->orderBy('avis.dateAvis', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findAvisUser(int $id): array
+    {
+        return $this->createQueryBuilder('avis')
+            ->addSelect('demande', 'user')
+            ->innerJoin('avis.demande', 'demande')
+            ->innerJoin('avis.user', 'user')
+            ->where('user.id = :id')
+            ->setParameter('id', $id)
+            ->orderBy('avis.dateAvis', 'DESC')
+            ->getQuery()
+            ->getResult();
     }
 }

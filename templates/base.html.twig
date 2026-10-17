@@ -7,7 +7,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
         <link rel="stylesheet" href="/assets/css/style.css"/>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        <link rel="icon" href="/assets/img/logo_ia.png" type="image/x-icon" sizes="32x32">
         {% block stylesheets %}
         {% endblock %}
 
@@ -24,10 +24,12 @@
     <body>
         {% set currentRoute = app.request.attributes.get('_route') %}
         {% set panierCount = app.session.get('panier_prestations', [])|length %}
-        {% if currentRoute != 'app_espace' and not (currentRoute starts with 'app_espace_') %}
+        {% if currentRoute not in ['app_espace', 'app_gestion_demande', 'app_demande_modifier','app_gestion_utilisateur'] and not (currentRoute starts with 'app_espace_') %}
             <nav class="nav-bar">
                 <div class="nav-logo">
+                    <a href="{{path("app_accueil")}}">
                     <img class="nav-bar-logo" src="/assets/img/logo_ia.png" alt="logo_entreprise">
+                    </a>
                     <h1>Eclat & Vous</h1>
                 </div>
 
@@ -35,36 +37,53 @@
                     <a href="{{path("app_accueil")}}">Accueil</a>
                     <a href="{{path("app_prestations")}}">Prestations</a>
                     <a href="{{ path('app_panier') }}">Panier{% if panierCount > 0 %} <span class="cart-count">{{ panierCount }}</span>{% endif %}</a>
-                    {% if app.user %}
-                        <a href="{{ path('app_demande')}}">Créer une demande</a>
-                        <a href="{{ path('app_logout') }}">Déconnexion</a>
-                    {% else %}
-                        <a href="{{ path('app_login') }}">Connexion</a>
-                    {% endif %}
+                    <a href="{{ path('app_demande')}}">Créer une demande</a>
+                  
+                  
                 </div>
 
+               <div class="nav-actions">
                 {% if is_granted('ROLE_ADMIN') %}
-                    <a href="{{path('app_espace')}}" class="nav-button">Espace Administrateur</a>
+                    <a href="{{ path('app_espace') }}" class="nav-button">Espace Administrateur</a>
                 {% elseif is_granted('ROLE_CLIENT') %}
-                    <a href="{{path('app_espace')}}" class="nav-button">Espace Client</a>
+                    <a href="{{ path('app_espace') }}" class="nav-button">Espace Client</a>
                 {% endif %}
+
+                {% if app.user %}
+                    <a href="{{ path('app_logout') }}" class="nav-button nav-auth-button">Déconnexion</a>
+                {% else %}
+                    <a href="{{ path('app_login') }}" class="nav-button nav-auth-button">Connexion</a>
+                {% endif %}
+</div>
             </nav>
        
         {% else %}
             <nav class="space-nav">
                 <div class="space-nav-logo">
+                    <a href="{{ path('app_accueil') }}">
                     <img class="space-nav-bar-logo" src="/assets/img/logo_ia.png" alt="logo_entreprise">
+                    </a>
                     <h1>Eclat & Vous</h1>
                 </div>
 
                 <div class="space-nav-item-list">
-                    <a href="{{ path('app_espace') }}" class="space-nav-button{% if currentRoute == 'app_espace' %} is-active{% endif %}">Tableau de bord</a>
+                    <a href="{{ path('app_espace') }}" class="space-nav-button{% if currentRoute == 'app_espace' %} is-active{% endif %}">Tableau de board</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{path('app_espace_prestation')}}" class="space-nav-button{% if currentRoute == 'app_espace_prestation' %} is-active{% endif %}">Gestion Prestations</a>
+                    {% endif %}
+                    <a href="{{path('app_espace_avis')}}" class="space-nav-button{% if currentRoute == 'app_espace_avis' %} is-active{% endif %}">Avis</a>
                     <a href="{{ path('app_panier') }}" class="space-nav-button">Panier{% if panierCount > 0 %} ({{ panierCount }}){% endif %}</a>
                     <a href="{{ path('app_demande') }}" class="space-nav-button">Créer une demande</a>
-                    <a href="{{ path('app_logout') }}" class="space-nav-button space-nav-logout">Déconnexion</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('app_gestion_utilisateur') }}" class="space-nav-button{% if currentRoute == 'app_gestion_utilisateur' %} is-active{% endif %}">Gérer les utilisateurs</a>
+                    {% endif %}
+                    <a href="javascript:history.back()" class="space-nav-button space-nav-logout">&larr; Retour en arrière</a>
+                   
+                    
                 </div>
             </nav>
         {% endif %}
-        {% block body %}{% endblock %}
+        {% block body %}
+        {% endblock %}
     </body>
 </html>

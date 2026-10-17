@@ -744,7 +744,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         enabled?: bool|Param, // Default: false
  *     },
  *     html?: bool|array{
- *         enabled?: bool|Param, // Default: true
+ *         enabled?: bool|Param, // Default: false
  *     },
  *     markdown?: bool|array{
  *         enabled?: bool|Param, // Default: false
@@ -1309,6 +1309,30 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     }>,
  *     role_hierarchy?: array<string, Param|string|list<scalar|Param|null>>,
  * }
+ * @psalm-type UxPaginationConfig = array{
+ *     items_per_page?: int|Param, // Default number of items per page // Default: 20
+ *     max_offset?: int|Param, // Maximum offset accepted by numbered pagination; use cursor pagination for larger datasets // Default: 100000
+ *     page_parameter?: scalar|Param|null, // Query parameter name for page number // Default: "page"
+ *     cursor_parameter?: scalar|Param|null, // Query parameter name for the cursor (cursor-based pagination) // Default: "cursor"
+ *     navigation?: array{
+ *         mode?: value-of<\Symfony\UX\Pagination\Navigation\NavigationMode>|\Symfony\UX\Pagination\Navigation\NavigationMode|Param, // Default numbered navigation mode // Default: "sliding"
+ *         size?: int|Param, // Default navigation window size // Default: 5
+ *     },
+ *     theme?: scalar|Param|null, // Twig template used to render pagination // Default: "@UXPagination/theme/default.html.twig"
+ *     cursor?: array{
+ *         secret?: scalar|Param|null, // The secret used to sign opaque cursors // Default: "%kernel.secret%"
+ *     },
+ *     paginators?: array<string, array{ // Default: []
+ *         items_per_page?: int|Param,
+ *         max_offset?: int|Param,
+ *         page_parameter?: scalar|Param|null,
+ *         cursor_parameter?: scalar|Param|null,
+ *         navigation?: array{
+ *             mode?: value-of<\Symfony\UX\Pagination\Navigation\NavigationMode>|\Symfony\UX\Pagination\Navigation\NavigationMode|Param,
+ *             size?: int|Param,
+ *         },
+ *     }>,
+ * }
  * @psalm-type ConfigType = array{
  *     imports?: ImportsConfig,
  *     parameters?: ParametersConfig,
@@ -1319,6 +1343,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     doctrine?: DoctrineConfig,
  *     doctrine_migrations?: DoctrineMigrationsConfig,
  *     security?: SecurityConfig,
+ *     ux_pagination?: UxPaginationConfig,
  *     "when@dev"?: array{
  *         imports?: ImportsConfig,
  *         parameters?: ParametersConfig,
@@ -1330,6 +1355,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         doctrine?: DoctrineConfig,
  *         doctrine_migrations?: DoctrineMigrationsConfig,
  *         security?: SecurityConfig,
+ *         ux_pagination?: UxPaginationConfig,
  *     },
  *     "when@prod"?: array{
  *         imports?: ImportsConfig,
@@ -1341,6 +1367,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         doctrine?: DoctrineConfig,
  *         doctrine_migrations?: DoctrineMigrationsConfig,
  *         security?: SecurityConfig,
+ *         ux_pagination?: UxPaginationConfig,
  *     },
  *     "when@test"?: array{
  *         imports?: ImportsConfig,
@@ -1352,6 +1379,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         doctrine?: DoctrineConfig,
  *         doctrine_migrations?: DoctrineMigrationsConfig,
  *         security?: SecurityConfig,
+ *         ux_pagination?: UxPaginationConfig,
  *     },
  *     ...<string, ExtensionType|array{ // extra keys must follow the when@%env% pattern or match an extension alias
  *         imports?: ImportsConfig,

@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if is_granted('ROLE_ADMIN') %}
+        Espace Administrateur
+    {% else %}
+        Espace Client
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+
+<div class="space-page">
+    <section class="espace">
+        <div class="stats stats--single">
+            <div class="stat-card">
+                <a href="{{ path('app_espace_prestation_ajouter') }}" class="btn-modifier">Ajouter</a>
+            </div>
+        </div>
+        <h1>Prestations</h1>
+
+        {% for message in app.flashes('success') %}
+            <p class="flash-success">{{ message }}</p>
+        {% endfor %}
+        {% for message in app.flashes('error') %}
+            <p class="flash-error">{{ message }}</p>
+        {% endfor %}
+
+        {% for prestation in prestations %}
+            {% set demandeUsedPresta = prestation.hasDemandesNonTerminees %}
+            <div class="demande-card">
+                <div>
+                    <img class="prestation-image" src="{{ asset('assets/img/prestations/' ~ prestation.image) }}" alt="{{ prestation.titre }}">
+                    <h3>{{ prestation.titre }}</h3>
+                    <p>{{ prestation.description }}</p>
+                    <div class="prestation-meta">
+                        <span>
+                            <span class="prestation-meta-label">Prix</span>
+                            <strong>{{ prestation.prix is not null ? prestation.prix|number_format(2, ',', ' ') ~ ' €' : 'Non renseigné' }}</strong>
+                        </span>
+                        <span>
+                            <span class="prestation-meta-label">Durée</span>
+                            <strong>{{ prestation.duree is not null ? prestation.duree ~ ' min' : 'Non renseignée' }}</strong>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="prestation-actions">
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('app_espace_prestation_modifier', {id: prestation.id}) }}" class="btn-modifier">Modifier</a>
+                        <form
+                            method="post"
+                            action="{{ path('app_espace_prestation_supprimer', {id: prestation.id}) }}"
+                            onsubmit="return confirm('Confirmer la suppression de cette prestation ?');"
+                        >
+                            <input type="hidden" name="_token" value="{{ csrf_token('supprimer_prestation_' ~ prestation.id) }}">
+                            <button
+                                type="submit"
+                                class="btn-supprimer"
+                                {% if demandeUsedPresta %}
+                                    disabled
+                                    title="Cette prestation est utilisée dans une ou plusieurs demandes non terminées"
+                                {% endif %}
+                            >
+                                Supprimer
+                            </button>
+                        </form>
+                        {% if demandeUsedPresta %}
+                            <p class="suppression-indisponible">Utilisée dans une ou plusieurs demandes non terminées</p>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        {% else %}
+            <p class="vide">Aucune prestation pour le moment.</p>
+        {% endfor %}
+    </section>
+    <div>
+        {{ ux_pagination(prestations)}}
+    </div>
+</div>
+
+{% endblock %}
