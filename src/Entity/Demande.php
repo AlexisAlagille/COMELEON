@@ -41,9 +41,6 @@ class Demande
 
     private ?Statut $statut = null;
 
-    #[ORM\OneToOne(mappedBy: 'demande', cascade: ['persist', 'remove'])]
-    private ?Reponse $reponse = null;
-
     #[ORM\OneToMany(mappedBy: 'demande', targetEntity: Avis::class)]
     private Collection $avis;
 
@@ -88,16 +85,6 @@ class Demande
 
     public function getStatut(): ?Statut { return $this->statut; }
     public function setStatut(?Statut $statut): self { $this->statut = $statut; return $this; }
-
-    public function getReponse(): ?Reponse { return $this->reponse; }
-    public function setReponse(?Reponse $reponse): self
-    {
-        $this->reponse = $reponse;
-        if ($reponse && $reponse->getDemande() !== $this) {
-            $reponse->setDemande($this);
-        }
-        return $this;
-    }
 
     public function getAvis(): Collection
     {
